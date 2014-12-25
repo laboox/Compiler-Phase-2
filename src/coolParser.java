@@ -213,6 +213,7 @@ public class coolParser extends Parser {
 
                     System.out.println(" and there is no father!");
                 }
+                typesGraph.AddNode(typeName, fatherName);
 
                 setState(55); match(T__4);
                 setState(61);
@@ -230,7 +231,7 @@ public class coolParser extends Parser {
                     _la = _input.LA(1);
                 }
                 setState(64); match(T__1);
-                typesGraph.AddNode(typeName, fatherName);
+                typesGraph.endNode();
             }
         }
         catch (RecognitionException re) {
@@ -280,15 +281,17 @@ public class coolParser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("3");
+                    //System.out.println("3");
                     {
                         setState(67); match(OBJECT);
+                        Method method = new Method(getCurrentToken().getText());
+
                         setState(68); match(T__10);
                         setState(77);
                         _la = _input.LA(1);
                         if (_la==OBJECT) {
                             {
-                                setState(69); formal();
+                                setState(69); formal(method);
                                 setState(74);
                                 _errHandler.sync(this);
                                 _la = _input.LA(1);
@@ -296,7 +299,7 @@ public class coolParser extends Parser {
                                     {
                                         {
                                             setState(70); match(T__15);
-                                            setState(71); formal();
+                                            setState(71); formal(method);
                                         }
                                     }
                                     setState(76);
@@ -309,20 +312,25 @@ public class coolParser extends Parser {
                         setState(79); match(T__18);
                         setState(80); match(T__11);
                         setState(81); match(TYPE);
+                        method.setReturnType(new Type(getCurrentToken().getText()));
                         setState(82); match(T__4);
                         setState(83); expr();
                         setState(84); match(T__1);
+                        typesGraph.addToHead(method);
                     }
                 }
                 break;
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("4");
+                    //System.out.println("4");
                     {
+
                         setState(87); match(OBJECT);
+                        String name = getCurrentToken().getText();
                         setState(88); match(T__11);
                         setState(89); match(TYPE);
+                        Type type = new Type(getCurrentToken().getText());
                         setState(92);
                         _la = _input.LA(1);
                         if (_la==T__0) {
@@ -331,7 +339,8 @@ public class coolParser extends Parser {
                                 setState(91); expr();
                             }
                         }
-
+                        Attribute attribute = new Attribute(name, type);
+                        typesGraph.addToHead(attribute);
                     }
                 }
                 break;
@@ -365,16 +374,19 @@ public class coolParser extends Parser {
         }
     }
 
-    public final FormalContext formal() throws RecognitionException {
+    public final FormalContext formal(Method method) throws RecognitionException {
         FormalContext _localctx = new FormalContext(_ctx, getState());
         enterRule(_localctx, 8, RULE_formal);
         try {
             enterOuterAlt(_localctx, 1);
             {
-                System.out.println("5");
+                //System.out.println("5");
                 setState(97); match(OBJECT);
+                String name = getCurrentToken().getText();
                 setState(98); match(T__11);
                 setState(99); match(TYPE);
+                Type type = new Type(getCurrentToken().getText());
+                method.addFormal(new Formal(name,type));
             }
         }
         catch (RecognitionException re) {
