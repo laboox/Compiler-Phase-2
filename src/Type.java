@@ -1,3 +1,5 @@
+import org.antlr.v4.runtime.Token;
+
 import java.util.ArrayList;
 
 /**
@@ -31,6 +33,8 @@ public class Type implements Comparable{
     private void init(){
         attributes = new ArrayList<Attribute>();
         methods = new ArrayList<Method>();
+        inheritable = true;
+        fatherName = "Object";
     }
 
     public Type(String name, Type father) {
@@ -44,7 +48,6 @@ public class Type implements Comparable{
         this.init();
         this.name = name;
         this.father = null;
-        this.fatherName = "";
     }
 
     public Type(String name, String fatherName){
@@ -68,6 +71,24 @@ public class Type implements Comparable{
     private String name;
     private String fatherName;
     private Type father;
+    private Token token;
+    private boolean inheritable;
+
+    public boolean isInheritable() {
+        return inheritable;
+    }
+
+    public void setInheritable(boolean inheritable) {
+        this.inheritable = inheritable;
+    }
+
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
 
     @Override
     public int compareTo(Object o) {

@@ -2,11 +2,8 @@
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class coolParser extends Parser {
@@ -196,8 +193,8 @@ public class coolParser extends Parser {
                 //System.out.println("2");
                 setState(49); match(CLASS);
                 String typeName = getCurrentToken().getText();
+                Token token = getCurrentToken();
                 String fatherName = "Object";
-                System.out.print("class is: " + getCurrentToken().getText());
                 setState(50); match(TYPE);
                 setState(53);
                 _la = _input.LA(1);
@@ -205,15 +202,10 @@ public class coolParser extends Parser {
                     {
                         setState(51); match(INHERITS);
                         fatherName = getCurrentToken().getText();
-                        System.out.println(" father is: "+getCurrentToken().getText());
                         setState(52); match(TYPE);
                     }
                 }
-                else{
-
-                    System.out.println(" and there is no father!");
-                }
-                typesGraph.AddNode(typeName, fatherName);
+                typesGraph.AddNode(typeName, fatherName, token);
 
                 setState(55); match(T__4);
                 setState(61);
@@ -285,7 +277,7 @@ public class coolParser extends Parser {
                     {
                         setState(67); match(OBJECT);
                         Method method = new Method(getCurrentToken().getText());
-
+                        method.setToken(getCurrentToken());
                         setState(68); match(T__10);
                         setState(77);
                         _la = _input.LA(1);
@@ -328,6 +320,7 @@ public class coolParser extends Parser {
 
                         setState(87); match(OBJECT);
                         String name = getCurrentToken().getText();
+                        Token token = getCurrentToken();
                         setState(88); match(T__11);
                         setState(89); match(TYPE);
                         Type type = new Type(getCurrentToken().getText());
@@ -340,6 +333,7 @@ public class coolParser extends Parser {
                             }
                         }
                         Attribute attribute = new Attribute(name, type);
+                        attribute.setToken(token);
                         typesGraph.addToHead(attribute);
                     }
                 }
@@ -383,10 +377,13 @@ public class coolParser extends Parser {
                 //System.out.println("5");
                 setState(97); match(OBJECT);
                 String name = getCurrentToken().getText();
+                Token token = getCurrentToken();
                 setState(98); match(T__11);
                 setState(99); match(TYPE);
                 Type type = new Type(getCurrentToken().getText());
-                method.addFormal(new Formal(name,type));
+                Formal formal = new Formal(name,type);
+                formal.setToken(token);
+                method.addFormal(formal);
             }
         }
         catch (RecognitionException re) {

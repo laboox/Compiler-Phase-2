@@ -1,3 +1,5 @@
+import org.antlr.v4.runtime.Token;
+
 import java.util.*;
 
 /**
@@ -11,21 +13,53 @@ public class InheritanceGraph {
 
     public InheritanceGraph() {
         types = new ArrayList<Type>();
-        Type Obj = new Type("Object");
+        Type Obj = new ObjectType();
         types.add(Obj);
-        types.add(new Type("IO", Obj));
-        types.add(new Type("String", Obj));
-        types.add(new Type("Int", Obj));
-        types.add(new Type("Bool", Obj));
+        types.add(new IOType());
+        types.add(new StringType());
+        types.add(new IntType());
+        types.add(new BoolType());
         head = new Stack<Type>();
     }
 
-    public void AddNode(String name, String parent){
-        if(types.contains(name)){
-            //TODO: handle duplicate type name
+    public void AddNode(String name, String parent, Token token){
+        if(types.contains(new Type(name))){
+            Type dupl = types.get(types.indexOf(new Type(name)));
+            if(dupl.matchName("Object")){
+                System.out.println("type");
+                ErrorHandler.printTokenLine(token);
+                System.out.println("cant redefined Object.");
+            }
+            else if(dupl.matchName("Int")){
+                System.out.println("type");
+                ErrorHandler.printTokenLine(token);
+                System.out.println("cant redefined Int.");
+            }
+            else if(dupl.matchName("IO")){
+                System.out.println("type");
+                ErrorHandler.printTokenLine(token);
+                System.out.println("cant redefined IO.");
+            }
+            else if(dupl.matchName("String")){
+                System.out.println("type");
+                ErrorHandler.printTokenLine(token);
+                System.out.println("cant redefined String.");
+            }
+            else if(dupl.matchName("Bool")){
+                System.out.println("type");
+                ErrorHandler.printTokenLine(token);
+                System.out.println("cant redefined Bool.");
+            }
+            else{
+                Type t =new Type(name,parent);
+                t.setToken(token);
+                ErrorHandler.duplicateTypes(dupl,t);
+            }
+            return;
         }
         types.add(new Type(name, parent));
         head.push(types.get(types.size()-1));
+        head.peek().setToken(token);
     }
 
     public void endNode(){
@@ -41,7 +75,7 @@ public class InheritanceGraph {
             if(n.getFather()==null && !n.matchName("Object")){
                 Type father = null;
                 for(Type f: types){
-                    if(f.matchName(n.getFatherName())){
+                    if(f.isInheritable() && f.matchName(n.getFatherName())){
                         father = f;
                         break;
                     }
@@ -116,6 +150,11 @@ public class InheritanceGraph {
         return false;
     }
 
+    public boolean haveMain(){
+
+        return true;
+    }
+
     public boolean isRedefined(){
         for(Type t: types){
             ArrayList<Attribute> attributes = (ArrayList<Attribute>)t.getAttributes().clone();
@@ -125,6 +164,7 @@ public class InheritanceGraph {
                 for(Attribute ta:attributes){
                     if(par.getAttributes().contains(ta)){
                         //TODO: redefined attribute error
+                        return true;
                     }
                 }
                 attributes.addAll(par.getAttributes());
@@ -141,6 +181,7 @@ public class InheritanceGraph {
                         Method dupl = par.getMethods().get(index);
                         if (!dupl.getFormals().equals(ta.getFormals())){
                             //TODO: redefined method error
+                            return true;
                         }
                     }
                 }
