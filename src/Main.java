@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         coolBaseListener cbl = new coolBaseListener();
-        coolLexer cl = new coolLexer(new ANTLRInputStream(new FileReader("/home/sina/IdeaProjects/coolP2/examples/graph.cl")));
+        coolLexer cl = new coolLexer(new ANTLRInputStream(new FileReader("/home/aida/IdeaProjects/coolP2/examples/er1.cl")));
         org.antlr.v4.runtime.CommonTokenStream tokens = new org.antlr.v4.runtime.CommonTokenStream(cl);
         typesGraph = new InheritanceGraph();
         coolParser cp = new coolParser(tokens, typesGraph);
