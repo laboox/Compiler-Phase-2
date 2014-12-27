@@ -96,16 +96,41 @@ public class Type implements Comparable{
         return name.toUpperCase().compareTo(other.getName().toUpperCase());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Type other = (Type)obj;
+        return name.toUpperCase().equals(other.getName().toUpperCase());
+    }
+
     public Boolean matchName(String oName){
         return name.toUpperCase().equals(oName.toUpperCase());
     }
 
     public void addMethod(Method method) {
-        methods.add(method);
+        if(!methods.contains(method)) {
+            if(method.haveRepeatedFormal()) {
+                return;
+            }
+            methods.add(method);
+        }
+        else{
+            Method dupl = methods.get(methods.indexOf(method));
+            ErrorHandler.invalidFeatureRedefine(dupl,method);
+        }
     }
 
-    public void addMethod(Attribute attribute) {
-        attributes.add(attribute);
+    public void addAttribute(Attribute attribute) {
+        if(attribute.matchName("self")){
+            ErrorHandler.invalidFeatureName(attribute);
+            return;
+        }
+        if(!attributes.contains(attribute)) {
+            attributes.add(attribute);
+        }
+        else{
+            Attribute dupl = attributes.get(attributes.indexOf(attribute));
+            ErrorHandler.invalidFeatureRedefine(dupl,attribute);
+        }
     }
 
     public boolean isVoid() {

@@ -1,4 +1,4 @@
---LOOP
+--LOOP solved
 Class X inherits Y {};
 Class Y inherits Z {};
 Class Z inherits T {};
@@ -8,7 +8,7 @@ Class T inherits X {};
 Class A inherits IO { 
 	
 	fa1() : Bool {1};
-	fa1() : Int {1}; --same method name
+	fa1() : Int {1}; --same method name solved
 	
 	
 	fa2() : Object {1};
@@ -16,21 +16,21 @@ Class A inherits IO {
 	fa4(pa1 : Int) : A {1};
 	
 	aa1 : IO;
-	aa1 : Int; --same attribute name
+	aa1 : Int; --same attribute name solved
 	
 	aa2 : Int;
 	aa3 : SELF_TYPE;
 };
 
-Class A {}; -- same class name
+Class A {}; -- same class name solved
 
 Class B inherits A {
 
 	fb1(pb1 : Int, pb2 : A) : B {1};
-	fb2(pb1 : Int, pb1 : A) : B {1};  --same argumant name 
+	fb2(pb1 : Int, pb1 : A) : B {1};  --same argumant name solved
 	fb3(pb1 : Int) : A {1};
 	fb4() : Int {1};
-	fb4(pb1 : Int) : Int {1}; --same method name
+	fb4(pb1 : Int) : Int {1}; --same method name solved
 	
 	
 	aa1 : Bool; --same attribute in father
@@ -38,6 +38,8 @@ Class B inherits A {
 	ab1 : Int;
 	ab2 : A; 
 };
+
+Class Sina inherits C {};
 
 Class C inherits B {
 	fc2() : A {1};

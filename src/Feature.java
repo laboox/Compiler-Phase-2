@@ -28,4 +28,14 @@ abstract public class Feature implements Comparable {
         Feature other = (Feature)o;
         return name.toLowerCase().compareTo(other.name.toLowerCase());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Feature other = (Feature)obj;
+        return name.toLowerCase().equals(other.getName().toLowerCase());
+    }
+
+    public boolean matchName(String oname){
+        return name.toLowerCase().equals(oname.toLowerCase());
+    }
 }

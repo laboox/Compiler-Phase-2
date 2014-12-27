@@ -128,7 +128,7 @@ public class coolParser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                System.out.println("1");
+                //System.out.println("1");
                 setState(44);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
@@ -275,9 +275,10 @@ public class coolParser extends Parser {
                 {
                     //System.out.println("3");
                     {
-                        setState(67); match(OBJECT);
+                        setState(67);
                         Method method = new Method(getCurrentToken().getText());
                         method.setToken(getCurrentToken());
+                        match(OBJECT);
                         setState(68); match(T__10);
                         setState(77);
                         _la = _input.LA(1);
@@ -303,8 +304,9 @@ public class coolParser extends Parser {
 
                         setState(79); match(T__18);
                         setState(80); match(T__11);
-                        setState(81); match(TYPE);
+                        setState(81);
                         method.setReturnType(new Type(getCurrentToken().getText()));
+                        match(TYPE);
                         setState(82); match(T__4);
                         setState(83); expr();
                         setState(84); match(T__1);
@@ -318,12 +320,14 @@ public class coolParser extends Parser {
                     //System.out.println("4");
                     {
 
-                        setState(87); match(OBJECT);
+                        setState(87);
                         String name = getCurrentToken().getText();
                         Token token = getCurrentToken();
+                        match(OBJECT);
                         setState(88); match(T__11);
-                        setState(89); match(TYPE);
+                        setState(89);
                         Type type = new Type(getCurrentToken().getText());
+                        match(TYPE);
                         setState(92);
                         _la = _input.LA(1);
                         if (_la==T__0) {
@@ -375,12 +379,14 @@ public class coolParser extends Parser {
             enterOuterAlt(_localctx, 1);
             {
                 //System.out.println("5");
-                setState(97); match(OBJECT);
+                setState(97);
                 String name = getCurrentToken().getText();
                 Token token = getCurrentToken();
+                match(OBJECT);
                 setState(98); match(T__11);
-                setState(99); match(TYPE);
+                setState(99);
                 Type type = new Type(getCurrentToken().getText());
+                match(TYPE);
                 Formal formal = new Formal(name,type);
                 formal.setToken(token);
                 method.addFormal(formal);
@@ -1400,7 +1406,7 @@ public class coolParser extends Parser {
                 case INTEGER:
                     enterOuterAlt(_localctx, 9);
                 {
-                    System.out.println("27");
+                    //System.out.println("27");
                     setState(301); match(INTEGER);
                 }
                 break;

@@ -30,6 +30,10 @@ public class Main {
         coolParser cp = new coolParser(tokens, typesGraph);
         cp.cool();
         typesGraph.completeGraph();
-        System.out.println("graph isCyclic: " + typesGraph.isCyclic());
+        if(typesGraph.isCyclic()){
+            System.out.println("Cant perform any other error check! pls solve this.");
+            System.exit(0);
+        }
+        //System.out.println("graph isCyclic: " + typesGraph.isCyclic());
     }
 }

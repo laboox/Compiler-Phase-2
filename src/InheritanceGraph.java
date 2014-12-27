@@ -55,7 +55,7 @@ public class InheritanceGraph {
                 t.setToken(token);
                 ErrorHandler.duplicateTypes(dupl,t);
             }
-            return;
+            //return;
         }
         types.add(new Type(name, parent));
         head.push(types.get(types.size()-1));
@@ -81,14 +81,12 @@ public class InheritanceGraph {
                     }
                 }
                 if(father==null){
-                    //TODO: handle no such father
+                    ErrorHandler.noSuchParent(n);
                 }
                 else{
                     n.setFather(father);
                 }
             }
-            if(!n.getName().matches("Object"))
-                System.err.println(""+n.getName()+" is "+n.getFather().getName()+"'s child!");
         }
         for (Type n : types){
             for(Attribute a: n.getAttributes()){
@@ -96,10 +94,11 @@ public class InheritanceGraph {
                 for(Type t:types){
                     if(t.matchName(a.getType().getName())){
                         atType = t;
+                        break;
                     }
                 }
                 if(atType==null && !a.getType().isSelfType()){
-                    //TODO: no such type error
+                    ErrorHandler.noSuchType(a.getToken());
                 }
                 else if(atType!=null){
                     a.setType(atType);
@@ -114,19 +113,22 @@ public class InheritanceGraph {
                     }
                 }
                 if(atType==null && !m.getReturnType().isSelfType()){
-                    //TODO: no such type error
+                    ErrorHandler.noSuchType(m.getToken());
                 }
                 else if(atType!=null){
                     m.setReturnType(atType);
                 }
+                //TODO: self type?
             }
         }
     }
 
     private boolean dfs(TreeMap<Type, color> mark, Type head){
         boolean ret = false;
-        if(mark.get(head).equals(color.gray))
+        if(mark.get(head).equals(color.gray)) {
+            ErrorHandler.cyclicGraph(head);
             return true;
+        }
         else if(mark.get(head).equals(color.black))
             return false;
         mark.put(head,color.gray);
@@ -196,7 +198,7 @@ public class InheritanceGraph {
     }
 
     public void addToHead(Attribute attribute) {
-        head.peek().addMethod(attribute);
+        head.peek().addAttribute(attribute);
     }
 
     private enum color{
