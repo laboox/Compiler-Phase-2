@@ -30,10 +30,23 @@ public class Main {
         coolParser cp = new coolParser(tokens, typesGraph);
         cp.cool();
         typesGraph.completeGraph();
+        if(!typesGraph.haveMain()){
+            System.out.println("no main function found.");
+            System.out.println();
+            ErrorHandler.setAnyError();
+        }
         if(typesGraph.isCyclic()){
             System.out.println("Cant perform any other error check! pls solve this.");
+            System.out.println();
             System.exit(0);
         }
+        typesGraph.isRedefined();
+        if(ErrorHandler.isAnyError()){
+            System.out.println("Cant continue compile because of errors.");
+            System.out.println();
+            System.exit(0);
+        }
+
         //System.out.println("graph isCyclic: " + typesGraph.isCyclic());
     }
 }

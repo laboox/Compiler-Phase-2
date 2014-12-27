@@ -1,8 +1,8 @@
 --LOOP solved
-Class X inherits Y {};
-Class Y inherits Z {};
-Class Z inherits T {};
-Class T inherits X {}; 
+--Class X inherits Y {};
+--Class Y inherits Z {};
+--Class Z inherits T {};
+--Class T inherits X {};
 
 
 Class A inherits IO { 
@@ -33,7 +33,7 @@ Class B inherits A {
 	fb4(pb1 : Int) : Int {1}; --same method name solved
 	
 	
-	aa1 : Bool; --same attribute in father
+	--aa1 : Bool; --same attribute in father solved
 	
 	ab1 : Int;
 	ab2 : A; 
@@ -50,7 +50,7 @@ Class C inherits B {
 	fa4(pa1 : Bool) : A {1};  --redefine method with wrong formal type
 	fa4(pa1 : Int) : B {1};  --redefine method with wrong Return type
 	
-	aa1 : A; --same attribute in grandfather
+	aa1 : A; --same attribute in grandfather solved
 };
 
 

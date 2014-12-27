@@ -153,11 +153,23 @@ public class InheritanceGraph {
     }
 
     public boolean haveMain(){
-
-        return true;
+        Type m = new Type("Main");
+        if(types.contains(m)) {
+            Type main = types.get(types.indexOf(m));
+            for(Method mm:main.getMethods()){
+                if(mm.matchName("main")){
+                    if(mm.getFormals().size()==0)
+                        return true;
+                    else
+                        break;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean isRedefined(){
+        boolean ret = false;
         for(Type t: types){
             ArrayList<Attribute> attributes = (ArrayList<Attribute>)t.getAttributes().clone();
             Type par = t;
@@ -165,8 +177,9 @@ public class InheritanceGraph {
                 par = par.getFather();
                 for(Attribute ta:attributes){
                     if(par.getAttributes().contains(ta)){
-                        //TODO: redefined attribute error
-                        return true;
+                        Attribute dupl = par.getAttributes().get(par.getAttributes().indexOf(ta));
+                        ErrorHandler.invalidFeatureRedefine(ta,dupl);
+                        ret =  true;
                     }
                 }
                 attributes.addAll(par.getAttributes());
@@ -181,16 +194,21 @@ public class InheritanceGraph {
                     if(par.getMethods().contains(ta)){
                         int index = par.getMethods().indexOf(ta);
                         Method dupl = par.getMethods().get(index);
-                        if (!dupl.getFormals().equals(ta.getFormals())){
-                            //TODO: redefined method error
-                            return true;
+                        if (dupl.getFormals().size() == ta.getFormals().size()){
+                            for (int i = 0; i < dupl.getFormals().size(); i++) {
+                                if(!dupl.getFormals().get(i).exactlyEqual(ta.getFormals().get(i))){
+                                    ErrorHandler.invalidFeatureRedefine(dupl.getFormals().get(i),ta.getFormals().get(i));
+                                    ret =  true;
+                                }
+                            }
+                            //TODO: Aida, inja mishe fahmid ye tabe override shode ya na too pass badi shayad be dard bokhore
                         }
                     }
                 }
                 methods.addAll(par.getMethods());
             }
         }
-        return false;
+        return ret ;
     }
 
     public void addToHead(Method method) {

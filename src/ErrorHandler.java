@@ -13,6 +13,14 @@ public class ErrorHandler {
     static private ArrayList<String> lines;
     static private boolean anyError = false;
 
+    public static void setAnyError(){
+        anyError = true;
+    }
+
+    public static boolean isAnyError() {
+        return anyError;
+    }
+
     public static void setCoolFile(FileReader coolFile) throws IOException {
         BufferedReader coolFileReader = new BufferedReader(coolFile);
         lines = new ArrayList<String>();

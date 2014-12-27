@@ -25,5 +25,8 @@ public class Formal extends Feature {
         this.type = type;
     }
 
-
+    public boolean exactlyEqual(Object o){
+        Formal other = (Formal)o;
+        return this.equals(other) && this.getType().equals(other.getType());
+    }
 }
