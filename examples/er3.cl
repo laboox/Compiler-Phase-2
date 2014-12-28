@@ -5,5 +5,5 @@ Class D inherits A {};
 Class E {};
 Class F inherits E {};
 Class Main {
-    main() : Object{};
+    main() : Object{1};
 };

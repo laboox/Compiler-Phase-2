@@ -1,4 +1,4 @@
-// Generated from cool.g4 by ANTLR 4.4
+// Generated from cool2.g4 by ANTLR 4.4
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -6,239 +6,239 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link coolListener},
+ * This class provides an empty implementation of {@link cool2Listener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class coolBaseListener implements coolListener {
+public class cool2BaseListener implements cool2Listener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVoidd(@NotNull pass1Parser.VoiddContext ctx) { }
+	@Override public void enterVoidd(@NotNull pass2Parser.VoiddContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVoidd(@NotNull pass1Parser.VoiddContext ctx) { }
+	@Override public void exitVoidd(@NotNull pass2Parser.VoiddContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCool(@NotNull pass1Parser.CoolContext ctx) { }
+	@Override public void enterCool(@NotNull pass2Parser.CoolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCool(@NotNull pass1Parser.CoolContext ctx) { }
+	@Override public void exitCool(@NotNull pass2Parser.CoolContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCall(@NotNull pass1Parser.CallContext ctx) { }
+	@Override public void enterCall(@NotNull pass2Parser.CallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCall(@NotNull pass1Parser.CallContext ctx) { }
+	@Override public void exitCall(@NotNull pass2Parser.CallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComp(@NotNull pass1Parser.CompContext ctx) { }
+	@Override public void enterComp(@NotNull pass2Parser.CompContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComp(@NotNull pass1Parser.CompContext ctx) { }
+	@Override public void exitComp(@NotNull pass2Parser.CompContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCall2(@NotNull pass1Parser.Call2Context ctx) { }
+	@Override public void enterCall2(@NotNull pass2Parser.Call2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCall2(@NotNull pass1Parser.Call2Context ctx) { }
+	@Override public void exitCall2(@NotNull pass2Parser.Call2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(@NotNull pass1Parser.ExprContext ctx) { }
+	@Override public void enterExpr(@NotNull pass2Parser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(@NotNull pass1Parser.ExprContext ctx) { }
+	@Override public void exitExpr(@NotNull pass2Parser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComp2(@NotNull pass1Parser.Comp2Context ctx) { }
+	@Override public void enterComp2(@NotNull pass2Parser.Comp2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComp2(@NotNull pass1Parser.Comp2Context ctx) { }
+	@Override public void exitComp2(@NotNull pass2Parser.Comp2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNot(@NotNull pass1Parser.NotContext ctx) { }
+	@Override public void enterNot(@NotNull pass2Parser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNot(@NotNull pass1Parser.NotContext ctx) { }
+	@Override public void exitNot(@NotNull pass2Parser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddsub(@NotNull pass1Parser.AddsubContext ctx) { }
+	@Override public void enterAddsub(@NotNull pass2Parser.AddsubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddsub(@NotNull pass1Parser.AddsubContext ctx) { }
+	@Override public void exitAddsub(@NotNull pass2Parser.AddsubContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFormal(@NotNull pass1Parser.FormalContext ctx) { }
+	@Override public void enterFormal(@NotNull pass2Parser.FormalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFormal(@NotNull pass1Parser.FormalContext ctx) { }
+	@Override public void exitFormal(@NotNull pass2Parser.FormalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProgram(@NotNull pass1Parser.ProgramContext ctx) { }
+	@Override public void enterProgram(@NotNull pass2Parser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProgram(@NotNull pass1Parser.ProgramContext ctx) { }
+	@Override public void exitProgram(@NotNull pass2Parser.ProgramContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTarget(@NotNull pass1Parser.TargetContext ctx) { }
+	@Override public void enterTarget(@NotNull pass2Parser.TargetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTarget(@NotNull pass1Parser.TargetContext ctx) { }
+	@Override public void exitTarget(@NotNull pass2Parser.TargetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterClas(@NotNull pass1Parser.ClasContext ctx) { }
+	@Override public void enterClas(@NotNull pass2Parser.ClasContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitClas(@NotNull pass1Parser.ClasContext ctx) { }
+	@Override public void exitClas(@NotNull pass2Parser.ClasContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMuldiv(@NotNull pass1Parser.MuldivContext ctx) { }
+	@Override public void enterMuldiv(@NotNull pass2Parser.MuldivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMuldiv(@NotNull pass1Parser.MuldivContext ctx) { }
+	@Override public void exitMuldiv(@NotNull pass2Parser.MuldivContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunc(@NotNull pass1Parser.FuncContext ctx) { }
+	@Override public void enterFunc(@NotNull pass2Parser.FuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunc(@NotNull pass1Parser.FuncContext ctx) { }
+	@Override public void exitFunc(@NotNull pass2Parser.FuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMuldiv2(@NotNull pass1Parser.Muldiv2Context ctx) { }
+	@Override public void enterMuldiv2(@NotNull pass2Parser.Muldiv2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMuldiv2(@NotNull pass1Parser.Muldiv2Context ctx) { }
+	@Override public void exitMuldiv2(@NotNull pass2Parser.Muldiv2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFeature(@NotNull pass1Parser.FeatureContext ctx) { }
+	@Override public void enterFeature(@NotNull pass2Parser.FeatureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFeature(@NotNull pass1Parser.FeatureContext ctx) { }
+	@Override public void exitFeature(@NotNull pass2Parser.FeatureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddsub2(@NotNull pass1Parser.Addsub2Context ctx) { }
+	@Override public void enterAddsub2(@NotNull pass2Parser.Addsub2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddsub2(@NotNull pass1Parser.Addsub2Context ctx) { }
+	@Override public void exitAddsub2(@NotNull pass2Parser.Addsub2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEnd(@NotNull pass1Parser.EndContext ctx) { }
+	@Override public void enterEnd(@NotNull pass2Parser.EndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEnd(@NotNull pass1Parser.EndContext ctx) { }
+	@Override public void exitEnd(@NotNull pass2Parser.EndContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

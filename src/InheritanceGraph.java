@@ -272,6 +272,7 @@ public class InheritanceGraph {
             t = t.getFather();
         }
         return null;
+
     }
 
     public boolean isInheritedAttribute(Type type, String attr){

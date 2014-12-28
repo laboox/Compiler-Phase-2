@@ -26,16 +26,16 @@ abstract public class Feature implements Comparable {
     @Override
     public int compareTo(Object o) {
         Feature other = (Feature)o;
-        return name.toLowerCase().compareTo(other.name.toLowerCase());
+        return name.compareTo(other.name);
     }
 
     @Override
     public boolean equals(Object obj) {
         Feature other = (Feature)obj;
-        return name.toLowerCase().equals(other.getName().toLowerCase());
+        return name.equals(other.getName());
     }
 
     public boolean matchName(String oname){
-        return name.toLowerCase().equals(oname.toLowerCase());
+        return name.equals(oname);
     }
 }

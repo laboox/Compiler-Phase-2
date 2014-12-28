@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 import java.util.List;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class coolParser extends Parser {
+public class pass1Parser extends Parser {
     static { RuntimeMetaData.checkVersion("4.4", RuntimeMetaData.VERSION); }
 
     protected static final DFA[] _decisionToDFA;
@@ -57,7 +57,7 @@ public class coolParser extends Parser {
     @Override
     public ATN getATN() { return _ATN; }
 
-    public coolParser(TokenStream input, InheritanceGraph typesGraph) {
+    public pass1Parser(TokenStream input, InheritanceGraph typesGraph) {
         super(input);
         _interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
         this.typesGraph = typesGraph;
@@ -163,12 +163,12 @@ public class coolParser extends Parser {
         public FeatureContext feature(int i) {
             return getRuleContext(FeatureContext.class,i);
         }
-        public TerminalNode INHERITS() { return getToken(coolParser.INHERITS, 0); }
+        public TerminalNode INHERITS() { return getToken(pass1Parser.INHERITS, 0); }
         public TerminalNode TYPE(int i) {
-            return getToken(coolParser.TYPE, i);
+            return getToken(pass1Parser.TYPE, i);
         }
-        public List<TerminalNode> TYPE() { return getTokens(coolParser.TYPE); }
-        public TerminalNode CLASS() { return getToken(coolParser.CLASS, 0); }
+        public List<TerminalNode> TYPE() { return getTokens(pass1Parser.TYPE); }
+        public TerminalNode CLASS() { return getToken(pass1Parser.CLASS, 0); }
         public ClasContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
@@ -238,7 +238,7 @@ public class coolParser extends Parser {
     }
 
     public static class FeatureContext extends ParserRuleContext {
-        public TerminalNode OBJECT() { return getToken(coolParser.OBJECT, 0); }
+        public TerminalNode OBJECT() { return getToken(pass1Parser.OBJECT, 0); }
         public FormalContext formal(int i) {
             return getRuleContext(FormalContext.class,i);
         }
@@ -248,7 +248,7 @@ public class coolParser extends Parser {
         public ExprContext expr() {
             return getRuleContext(ExprContext.class,0);
         }
-        public TerminalNode TYPE() { return getToken(coolParser.TYPE, 0); }
+        public TerminalNode TYPE() { return getToken(pass1Parser.TYPE, 0); }
         public FeatureContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
@@ -356,8 +356,8 @@ public class coolParser extends Parser {
     }
 
     public static class FormalContext extends ParserRuleContext {
-        public TerminalNode OBJECT() { return getToken(coolParser.OBJECT, 0); }
-        public TerminalNode TYPE() { return getToken(coolParser.TYPE, 0); }
+        public TerminalNode OBJECT() { return getToken(pass1Parser.OBJECT, 0); }
+        public TerminalNode TYPE() { return getToken(pass1Parser.TYPE, 0); }
         public FormalContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
@@ -404,7 +404,7 @@ public class coolParser extends Parser {
     }
 
     public static class ExprContext extends ParserRuleContext {
-        public TerminalNode OBJECT() { return getToken(coolParser.OBJECT, 0); }
+        public TerminalNode OBJECT() { return getToken(pass1Parser.OBJECT, 0); }
         public ExprContext expr() {
             return getRuleContext(ExprContext.class,0);
         }
@@ -463,7 +463,7 @@ public class coolParser extends Parser {
         public CompContext comp() {
             return getRuleContext(CompContext.class,0);
         }
-        public TerminalNode NOT() { return getToken(coolParser.NOT, 0); }
+        public TerminalNode NOT() { return getToken(pass1Parser.NOT, 0); }
         public NotContext not() {
             return getRuleContext(NotContext.class,0);
         }
@@ -854,7 +854,7 @@ public class coolParser extends Parser {
     }
 
     public static class VoiddContext extends ParserRuleContext {
-        public TerminalNode ISVOID() { return getToken(coolParser.ISVOID, 0); }
+        public TerminalNode ISVOID() { return getToken(pass1Parser.ISVOID, 0); }
         public TargetContext target() {
             return getRuleContext(TargetContext.class,0);
         }
@@ -1032,7 +1032,7 @@ public class coolParser extends Parser {
     }
 
     public static class Call2Context extends ParserRuleContext {
-        public TerminalNode OBJECT() { return getToken(coolParser.OBJECT, 0); }
+        public TerminalNode OBJECT() { return getToken(pass1Parser.OBJECT, 0); }
         public List<ExprContext> expr() {
             return getRuleContexts(ExprContext.class);
         }
@@ -1042,7 +1042,7 @@ public class coolParser extends Parser {
         public Call2Context call2() {
             return getRuleContext(Call2Context.class,0);
         }
-        public TerminalNode TYPE() { return getToken(coolParser.TYPE, 0); }
+        public TerminalNode TYPE() { return getToken(pass1Parser.TYPE, 0); }
         public Call2Context(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }
@@ -1125,7 +1125,7 @@ public class coolParser extends Parser {
     }
 
     public static class FuncContext extends ParserRuleContext {
-        public TerminalNode OBJECT() { return getToken(coolParser.OBJECT, 0); }
+        public TerminalNode OBJECT() { return getToken(pass1Parser.OBJECT, 0); }
         public List<ExprContext> expr() {
             return getRuleContexts(ExprContext.class);
         }
@@ -1207,37 +1207,37 @@ public class coolParser extends Parser {
     }
 
     public static class EndContext extends ParserRuleContext {
-        public TerminalNode POOL() { return getToken(coolParser.POOL, 0); }
-        public TerminalNode THEN() { return getToken(coolParser.THEN, 0); }
-        public List<TerminalNode> OBJECT() { return getTokens(coolParser.OBJECT); }
-        public TerminalNode TRUE() { return getToken(coolParser.TRUE, 0); }
-        public TerminalNode FI() { return getToken(coolParser.FI, 0); }
-        public TerminalNode LOOP() { return getToken(coolParser.LOOP, 0); }
+        public TerminalNode POOL() { return getToken(pass1Parser.POOL, 0); }
+        public TerminalNode THEN() { return getToken(pass1Parser.THEN, 0); }
+        public List<TerminalNode> OBJECT() { return getTokens(pass1Parser.OBJECT); }
+        public TerminalNode TRUE() { return getToken(pass1Parser.TRUE, 0); }
+        public TerminalNode FI() { return getToken(pass1Parser.FI, 0); }
+        public TerminalNode LOOP() { return getToken(pass1Parser.LOOP, 0); }
         public TerminalNode TYPE(int i) {
-            return getToken(coolParser.TYPE, i);
+            return getToken(pass1Parser.TYPE, i);
         }
-        public TerminalNode IN() { return getToken(coolParser.IN, 0); }
-        public TerminalNode WHILE() { return getToken(coolParser.WHILE, 0); }
-        public TerminalNode IF() { return getToken(coolParser.IF, 0); }
-        public TerminalNode NEW() { return getToken(coolParser.NEW, 0); }
-        public TerminalNode LET() { return getToken(coolParser.LET, 0); }
+        public TerminalNode IN() { return getToken(pass1Parser.IN, 0); }
+        public TerminalNode WHILE() { return getToken(pass1Parser.WHILE, 0); }
+        public TerminalNode IF() { return getToken(pass1Parser.IF, 0); }
+        public TerminalNode NEW() { return getToken(pass1Parser.NEW, 0); }
+        public TerminalNode LET() { return getToken(pass1Parser.LET, 0); }
         public List<ExprContext> expr() {
             return getRuleContexts(ExprContext.class);
         }
-        public TerminalNode ELSE() { return getToken(coolParser.ELSE, 0); }
+        public TerminalNode ELSE() { return getToken(pass1Parser.ELSE, 0); }
         public TerminalNode OBJECT(int i) {
-            return getToken(coolParser.OBJECT, i);
+            return getToken(pass1Parser.OBJECT, i);
         }
         public ExprContext expr(int i) {
             return getRuleContext(ExprContext.class,i);
         }
-        public TerminalNode OF() { return getToken(coolParser.OF, 0); }
-        public TerminalNode CASE() { return getToken(coolParser.CASE, 0); }
-        public TerminalNode STRING() { return getToken(coolParser.STRING, 0); }
-        public TerminalNode INTEGER() { return getToken(coolParser.INTEGER, 0); }
-        public List<TerminalNode> TYPE() { return getTokens(coolParser.TYPE); }
-        public TerminalNode FALSE() { return getToken(coolParser.FALSE, 0); }
-        public TerminalNode ESAC() { return getToken(coolParser.ESAC, 0); }
+        public TerminalNode OF() { return getToken(pass1Parser.OF, 0); }
+        public TerminalNode CASE() { return getToken(pass1Parser.CASE, 0); }
+        public TerminalNode STRING() { return getToken(pass1Parser.STRING, 0); }
+        public TerminalNode INTEGER() { return getToken(pass1Parser.INTEGER, 0); }
+        public List<TerminalNode> TYPE() { return getTokens(pass1Parser.TYPE); }
+        public TerminalNode FALSE() { return getToken(pass1Parser.FALSE, 0); }
+        public TerminalNode ESAC() { return getToken(pass1Parser.ESAC, 0); }
         public EndContext(ParserRuleContext parent, int invokingState) {
             super(parent, invokingState);
         }

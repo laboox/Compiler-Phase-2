@@ -93,17 +93,17 @@ public class Type implements Comparable{
     @Override
     public int compareTo(Object o) {
         Type other = (Type)o;
-        return name.toUpperCase().compareTo(other.getName().toUpperCase());
+        return name.compareTo(other.getName());
     }
 
     @Override
     public boolean equals(Object obj) {
         Type other = (Type)obj;
-        return name.toUpperCase().equals(other.getName().toUpperCase());
+        return name.equals(other.getName());
     }
 
     public Boolean matchName(String oName){
-        return name.toUpperCase().equals(oName.toUpperCase());
+        return name.equals(oName);
     }
 
     public void addMethod(Method method) {
