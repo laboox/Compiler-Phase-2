@@ -29,4 +29,12 @@ public class Formal extends Feature {
         Formal other = (Formal)o;
         return this.equals(other) && this.getType().equals(other.getType());
     }
+
+    @Override
+    public String toString() {
+        return "Formal{" +
+                "name='" + name + '\'' +
+                "type='" + type.getName() + '\'' +
+                '}';
+    }
 }

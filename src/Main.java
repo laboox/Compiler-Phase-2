@@ -49,6 +49,7 @@ public class Main {
             System.out.println();
             System.exit(0);
         }
+        typesGraph.printTypes();
 
         pass2Parser pass2 = new pass2Parser(tokens2);
         pass2.cool();

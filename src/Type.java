@@ -65,6 +65,14 @@ public class Type implements Comparable{
         return methods;
     }
 
+    public Method getMethod(String name){
+        for(Method m: methods){
+            if(m.matchName(name))
+                return m;
+        }
+        return null;
+    }
+
     private ArrayList<Attribute> attributes;
     private ArrayList<Method> methods;
 
@@ -145,6 +153,7 @@ public class Type implements Comparable{
     public String toString() {
         return "Type{" +
                 "name='" + name + '\'' +
+                "father='" + ((father!=null)?father.getName():"null") + '\''+
                 '}';
     }
 }

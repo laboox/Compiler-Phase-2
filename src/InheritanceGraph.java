@@ -252,6 +252,21 @@ public class InheritanceGraph {
         return types.get(0);
     }
 
+    public void printTypes(){
+        for(Type t : types){
+            System.out.println(""+t);
+            for(Attribute a:t.getAttributes()){
+                System.out.println("\t"+a);
+            }
+            for(Method m:t.getMethods()){
+                System.out.println("\t"+m);
+                for(Formal f:m.getFormals()){
+                    System.out.println("\t\t"+f);
+                }
+            }
+        }
+    }
+
     public void addToHead(Method method) {
         head.peek().addMethod(method);
     }
@@ -260,23 +275,31 @@ public class InheritanceGraph {
         head.peek().addAttribute(attribute);
     }
 
-
-
-    public Type getAttributeType(Type type, String attr){
+    public Method getMethodDFS(Type type, String meth){
         Type t = getType(type.getName());
-        Attribute a = new Attribute(attr,t);
         while(!t.equals(types.get(0))){
-            if(t.getAttributes().contains(a)){
-                return t.getAttributes().get(t.getAttributes().indexOf(a)).getType();
+            if(t.getMethod(meth)!=null){
+                return t.getMethod(meth);
             }
             t = t.getFather();
         }
         return null;
+    }
 
+    public Attribute getAttributeDFS(Type type, String attr){
+        Type t = getType(type.getName());
+        Attribute a = new Attribute(attr,t);
+        while(!t.equals(types.get(0))){
+            if(t.getAttributes().contains(a)){
+                return t.getAttributes().get(t.getAttributes().indexOf(a));
+            }
+            t = t.getFather();
+        }
+        return null;
     }
 
     public boolean isInheritedAttribute(Type type, String attr){
-        return !(getAttributeType(type,attr)==null);
+        return !(getAttributeDFS(type, attr)==null);
     }
 
     private enum color{

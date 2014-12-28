@@ -16,4 +16,12 @@ public class Attribute extends Feature {
         this.name = name;
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Attribute{" +
+                "name='" + name + '\'' +
+                "type='" + type.getName() + '\'' +
+                '}';
+    }
 }

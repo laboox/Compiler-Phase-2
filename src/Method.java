@@ -11,6 +11,24 @@ public class Method extends Feature {
         return formals;
     }
 
+    public Formal getFormal(int index){
+        if(index<formals.size())
+            return formals.get(index);
+        return null;
+    }
+
+    public Formal getFormal(String name){
+        for(Formal f:formals){
+            if(f.matchName(name))
+                return f;
+        }
+        return null;
+    }
+
+    public boolean isFormalExist(String name){
+        return !(getFormal(name)==null);
+    }
+
     public Method(String name) {
         this.name = name;
         formals = new ArrayList<Formal>();
@@ -38,5 +56,13 @@ public class Method extends Feature {
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Method{" +
+                "name='" + name + '\'' +
+                "returnType='" + returnType.getName() + '\'' +
+                '}';
     }
 }
