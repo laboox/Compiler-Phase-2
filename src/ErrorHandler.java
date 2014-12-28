@@ -66,6 +66,15 @@ public class ErrorHandler {
         anyError =true;
     }
 
+
+    public static void noSuchVar(Token token) {
+        System.out.println("variable of");
+        printTokenLine(token);
+        System.out.println("is not defined in this scope.");
+        System.out.println();
+        anyError =true;
+    }
+
     public static void invalidFeatureRedefine(Feature f1, Feature f2){
         System.out.println("features");
         printTokenLine(f1.getToken());
@@ -99,26 +108,31 @@ public class ErrorHandler {
             head = head.getFather();
         }
         System.out.println(start);
+        anyError =true;
     }
 
     public static void exitScopeErr() {
         System.out.println("existScope: can't remove scope from an empty symbol table.");
         System.out.println();
+        anyError =true;
     }
 
     public static void lookUpErr() {
         System.out.println("lookup: no scope in symbol table.");
         System.out.println();
+        anyError =true;
     }
 
     public static void probErr() {
         System.out.println("lookup: no scope in symbol table.");
         System.out.println();
+        anyError =true;
     }
 
     public static void addIdErr() {
         System.out.println("addId: can't add a symbol without a scope.");
         System.out.println();
+        anyError =true;
     }
 
 
