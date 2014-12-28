@@ -260,6 +260,24 @@ public class InheritanceGraph {
         head.peek().addAttribute(attribute);
     }
 
+
+
+    public Type getAttributeType(Type type, String attr){
+        Type t = getType(type.getName());
+        Attribute a = new Attribute(attr,t);
+        while(!t.equals(types.get(0))){
+            if(t.getAttributes().contains(a)){
+                return t.getAttributes().get(t.getAttributes().indexOf(a)).getType();
+            }
+            t = t.getFather();
+        }
+        return null;
+    }
+
+    public boolean isInheritedAttribute(Type type, String attr){
+        return !(getAttributeType(type,attr)==null);
+    }
+
     private enum color{
         white,black,gray;
     }
