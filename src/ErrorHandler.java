@@ -66,7 +66,10 @@ public class ErrorHandler {
         anyError =true;
     }
 
-
+    public static void invalidIdRedefined(Token token) {
+        System.out.println("variable "+token.getText()+" is defined in this scope before");
+        printTokenLine(token);
+    }
     public static void noSuchVar(Token token) {
         System.out.println("variable " + token.getText());
         printTokenLine(token);
@@ -134,6 +137,7 @@ public class ErrorHandler {
         System.out.println();
         anyError =true;
     }
-
+    //TODO if exeption is for pass2 must throw or if is for both pass
+    //TODO any error must be true
 
 }

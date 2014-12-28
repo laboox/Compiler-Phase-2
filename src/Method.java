@@ -25,7 +25,7 @@ public class Method extends Feature {
         return null;
     }
 
-    public boolean isFormalExist(String name){
+    public boolean formalExists(String name){
         return !(getFormal(name)==null);
     }
 

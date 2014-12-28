@@ -1369,7 +1369,7 @@ public class pass2Parser extends Parser {
                 case CASE:
                     enterOuterAlt(_localctx, 5);
                 {
-                    symbolTable.exitScope();
+                    symbolTable.enterScope();
                     System.out.println("13");
                     setState(274); match(CASE);
                     setState(275); expr();
@@ -1382,11 +1382,12 @@ public class pass2Parser extends Parser {
                             {
                                 setState(277);
                                 String id=getCurrentToken().getText();
+                                if(symbolTable.getMethodScope().formalExists(id))
+                                    ErrorHandler.invalidIdRedefined(getCurrentToken());
                                 match(OBJECT);
                                 setState(278); match(T__11);
                                 setState(279);
                                 Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
-                                //TODO not arguman of class
                                 symbolTable.addId(id,idType);
                                 match(TYPE);
                                 setState(280); match(T__16);
@@ -1408,7 +1409,13 @@ public class pass2Parser extends Parser {
                     //System.out.println("14");
                     setState(291); match(NEW);
                     setState(292);
-                    //String
+                    String idType=getCurrentToken().getText();
+                    if(idType=="SELF_TYPE")
+                        _localctx.setType(symbolTable.getClassScope());
+                    else if(symbolTable.getInheritanceGraph().typeExists(idType))
+                        ErrorHandler.noSuchType(getCurrentToken());
+                    else
+                        _localctx.setType(symbolTable.getInheritanceGraph().getType(idType));
                     match(TYPE);
                 }
                 break;
