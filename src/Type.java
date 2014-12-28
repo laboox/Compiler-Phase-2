@@ -140,4 +140,11 @@ public class Type implements Comparable{
     public boolean isSelfType() {
         return name.equals("SELF_TYPE");
     }
+
+    @Override
+    public String toString() {
+        return "Type{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

@@ -55,10 +55,10 @@ public class InheritanceGraph {
                 t.setToken(token);
                 ErrorHandler.duplicateTypes(dupl,t);
             }
-            //return;
+            return;
         }
         types.add(new Type(name, parent));
-        head.push(types.get(types.size()-1));
+        head.push(types.get(types.size() - 1));
         head.peek().setToken(token);
     }
 
@@ -82,6 +82,7 @@ public class InheritanceGraph {
                 }
                 if(father==null){
                     ErrorHandler.noSuchParent(n);
+                    n.setFather(types.get(0));
                 }
                 else{
                     n.setFather(father);
@@ -209,6 +210,46 @@ public class InheritanceGraph {
             }
         }
         return ret ;
+    }
+
+    public Type getType(String name){
+        for(Type t: types){
+            if(t.matchName(name))
+                return t;
+        }
+        return null;
+    }
+
+    public boolean isFather(Type child, Type father){
+        child = getType(child.getName());
+        father = getType(father.getName());
+        if(father.equals(types.get(0)))
+            return true;
+        Type t = child;
+        while(!t.equals(types.get(0))){
+            if(t.equals(father))
+                return true;
+            t = t.getFather();
+        }
+        return false;
+    }
+
+    public Type grandMate(Type t1, Type t2){
+        t1 = getType(t1.getName());
+        t2 = getType(t2.getName());
+        TreeSet<Type> ancestors = new TreeSet<Type>();
+        Type t = t1;
+        while(!t.equals(types.get(0))){
+            ancestors.add(t);
+            t = t.getFather();
+        }
+        t = t2;
+        while(!t.equals(types.get(0))){
+            if(ancestors.contains(t))
+                return t;
+            t = t.getFather();
+        }
+        return types.get(0);
     }
 
     public void addToHead(Method method) {

@@ -47,6 +47,14 @@ public class Main {
             System.exit(0);
         }
 
+        System.out.println(typesGraph.isFather(new Type("A"), new Type("A")));
+        System.out.println(typesGraph.isFather(new Type("D"),new Type("C")));
+        System.out.println(typesGraph.isFather(new Type("C"), new Type("A")));
+        System.out.println(typesGraph.grandMate(new Type("F"),new Type("C")));
+        System.out.println(typesGraph.grandMate(new Type("B"),new Type("A")));
+        System.out.println(typesGraph.grandMate(new Type("D"), new Type("Object")));
+        System.out.println(typesGraph.grandMate(new Type("D"), new Type("C")));
+
         //System.out.println("graph isCyclic: " + typesGraph.isCyclic());
     }
 }

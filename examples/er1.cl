@@ -52,7 +52,7 @@ Class C inherits B {
 	
 	aa1 : A; --same attribute in grandfather solved
 };
-
+`
 
 Class Mai inherits IO {   -- there is no Main class
 
