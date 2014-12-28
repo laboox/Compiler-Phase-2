@@ -91,7 +91,6 @@ public class ErrorHandler {
         anyError =true;
     }
 
-
     public static void cyclicGraph(Type head) {
         System.out.println("inheritance graph is cyclic");
         String start = head.getName();
@@ -101,4 +100,26 @@ public class ErrorHandler {
         }
         System.out.println(start);
     }
+
+    public static void exitScopeErr() {
+        System.out.println("existScope: can't remove scope from an empty symbol table.");
+        System.out.println();
+    }
+
+    public static void lookUpErr() {
+        System.out.println("lookup: no scope in symbol table.");
+        System.out.println();
+    }
+
+    public static void probErr() {
+        System.out.println("lookup: no scope in symbol table.");
+        System.out.println();
+    }
+
+    public static void addIdErr() {
+        System.out.println("addId: can't add a symbol without a scope.");
+        System.out.println();
+    }
+
+
 }
