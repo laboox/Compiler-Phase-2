@@ -68,7 +68,7 @@ public class ErrorHandler {
 
 
     public static void noSuchVar(Token token) {
-        System.out.println("variable of");
+        System.out.println("variable " + token.getText());
         printTokenLine(token);
         System.out.println("is not defined in this scope.");
         System.out.println();

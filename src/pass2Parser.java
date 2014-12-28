@@ -408,6 +408,13 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitExpr(this);
         }
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final ExprContext expr() throws RecognitionException {
@@ -1235,15 +1242,13 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitEnd(this);
         }
-        private Type type;
-
         public Type getType() {
             return type;
         }
-
         public void setType(Type type) {
             this.type = type;
         }
+        private Type type;
     }
 
     public final EndContext end() throws RecognitionException {
@@ -1307,11 +1312,12 @@ public class pass2Parser extends Parser {
                     setState(250); match(LET);
                     setState(251);
                     String id=getCurrentToken().getText();
+                    //if(! symbolTable.getMethodScope().isFormalExist(id))
+
                     match(OBJECT);
                     setState(252); match(T__11);
                     setState(253);
                     Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
-                    //TODO not arguman of class
                     symbolTable.addId(id, idType);
                     match(TYPE);
                     setState(256);
@@ -1401,7 +1407,9 @@ public class pass2Parser extends Parser {
                 {
                     //System.out.println("14");
                     setState(291); match(NEW);
-                    setState(292); match(TYPE);
+                    setState(292);
+                    //String
+                    match(TYPE);
                 }
                 break;
                 case T__10:
@@ -1409,7 +1417,7 @@ public class pass2Parser extends Parser {
                 {
                     //System.out.println("25");
                     setState(294); match(T__10);
-                    setState(295); expr();
+                    setState(295); _localctx.setType(expr().getType());
                     setState(296); match(T__18);
                 }
                 break;
@@ -1420,12 +1428,13 @@ public class pass2Parser extends Parser {
                     setState(299);
                     String id=getCurrentToken().getText();
                     Type idType= symbolTable.lookup(id);
-                    if(idType==null)
-                        idType= symbolTable.getInheritanceGraph().getAttributeDFS(symbolTable.getClassScope(),id).getType();
-                    if(idType==null)
-                        ErrorHandler.noSuchVar(getCurrentToken());
-                    else
-                        _localctx.setType(idType);
+                    if(idType==null) {
+                        Attribute attribute = symbolTable.getInheritanceGraph().getAttributeDFS(symbolTable.getClassScope(), id);
+                        if (attribute == null)
+                            ErrorHandler.noSuchVar(getCurrentToken());
+                        else
+                            _localctx.setType(attribute.getType());
+                    }
                     match(OBJECT);
                 }
                 break;
