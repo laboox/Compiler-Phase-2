@@ -1,40 +1,11 @@
-
-import java.util.Stack;
 import java.util.Hashtable;
+import java.util.Stack;
 
-/** Implements the symbol table data abstraction.
- *
- * <p>
- *
- * In addition to strings, compilers must also determine and manage the
- * scope of program names.  A symbol table is a data structure for
- * managing scope.  Conceptually, a symbol table is just another lookup
- * table.  The key is the symbol (the name) and the result is whatever
- * information has been associated with that symbol (e.g., the symbol's
- * type).
- *
- * <p>
- *
- * In addition to adding and removing symbols, symbol tables also
- * support operations for entering and exiting scopes and for checking
- * whether an identifier is already defined in the current scope.  The
- * lookup operation must also observe the scoping rules of the language;
- * if there are multiple definitions of identifier <code>x</code>, the
- * scoping rules determine which definition a lookup of <code>x</code>
- * returns.  In most languages, including Cool, inner definitions hide
- * outer definitions.  Thus, a lookup on <code>x</code> returns the
- * definition of <code>x</code> from the innermost scope with a
- * definition of <code>x</code>.
- *
- * <p>
- *
- * Cool symbol tables are implemented using Java hash tables.  Each
- * hash table represents a scope and associates a symbol with some
- * data. The ``data'' is whatever data the programmer wishes to
- * associate with each identifier.  An example illustrating the use of
- *
- * */
-class SymbolTable {
+/**
+ * Created by aida on 12/28/14.
+ */
+public class SymbolTable {
+
     private Stack tbl;
     private Type classScope;
     private Method methodScope;
@@ -119,6 +90,3 @@ class SymbolTable {
         return res;
     }
 }
-    
-	
-	

@@ -60,7 +60,7 @@ public class pass2Parser extends Parser {
     public pass2Parser(TokenStream input, SymbolTable symbolTable) {
         super(input);
         _interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
-        this.symbolTable=symbolTable;
+        this.symbolTable = symbolTable;
     }
     public static class CoolContext extends ParserRuleContext {
         public ProgramContext program() {
@@ -1310,7 +1310,7 @@ public class pass2Parser extends Parser {
                     match(OBJECT);
                     setState(252); match(T__11);
                     setState(253);
-                    Type idType=symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                    Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
                     //TODO not arguman of class
                     symbolTable.addId(id, idType);
                     match(TYPE);
@@ -1335,7 +1335,7 @@ public class pass2Parser extends Parser {
                                 match(OBJECT);
                                 setState(260); match(T__11);
                                 setState(261);
-                                idType=symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                                idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
                                 //TODO not arguman of class
                                 symbolTable.addId(id,idType);
 
@@ -1379,7 +1379,7 @@ public class pass2Parser extends Parser {
                                 match(OBJECT);
                                 setState(278); match(T__11);
                                 setState(279);
-                                Type idType=symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                                Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
                                 //TODO not arguman of class
                                 symbolTable.addId(id,idType);
                                 match(TYPE);
@@ -1419,9 +1419,9 @@ public class pass2Parser extends Parser {
                     //System.out.println("26");
                     setState(299);
                     String id=getCurrentToken().getText();
-                    Type idType=symbolTable.lookup(id);
+                    Type idType= symbolTable.lookup(id);
                     if(idType==null)
-                        idType=symbolTable.getInheritanceGraph().getAttributeDFS(symbolTable.getClassScope(),id).getType();
+                        idType= symbolTable.getInheritanceGraph().getAttributeDFS(symbolTable.getClassScope(),id).getType();
                     if(idType==null)
                         ErrorHandler.noSuchVar(getCurrentToken());
                     else
