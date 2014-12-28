@@ -6,8 +6,8 @@ Class B inherits A {
 };
 Class C inherits B {
     a(a:Int, d:String):String{
-        let k: d:String,a:String in d + a + b;
-    }
+        let d : String , a : String in d + a + w
+    };
 };
 Class D inherits A {};
 Class E {};
