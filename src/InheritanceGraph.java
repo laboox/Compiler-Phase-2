@@ -220,6 +220,10 @@ public class InheritanceGraph {
         return null;
     }
 
+    public boolean typeExists(String name){
+        return (getType(name)==null);
+    }
+
     public boolean isFather(Type child, Type father){
         child = getType(child.getName());
         father = getType(father.getName());
@@ -298,9 +302,7 @@ public class InheritanceGraph {
         return null;
     }
 
-    public boolean typeExists(String name){
-        return types.contains(new Type(name));
-    }
+
 
     public boolean isInheritedAttribute(Type type, String attr){
         return !(getAttributeDFS(type, attr)==null);
