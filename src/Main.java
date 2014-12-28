@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Main {
 
     private static InheritanceGraph typesGraph;
+    private static SymbolTable symbolTable;
 
     public static void main(String[] args) throws IOException {
         if(args.length<=0){
@@ -51,7 +52,8 @@ public class Main {
         }
         typesGraph.printTypes();
 
-        pass2Parser pass2 = new pass2Parser(tokens2);
+        symbolTable = new SymbolTable(typesGraph);
+        pass2Parser pass2 = new pass2Parser(tokens2, symbolTable);
         pass2.cool();
     }
 }
