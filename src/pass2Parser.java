@@ -1337,12 +1337,16 @@ public class pass2Parser extends Parser {
                             {
                                 setState(258); match(T__15);
                                 setState(259);
+
                                 id=getCurrentToken().getText();
+                                if(symbolTable.getMethodScope().formalExists(id))
+                                    ErrorHandler.invalidIdRedefined(getCurrentToken());
+
                                 match(OBJECT);
                                 setState(260); match(T__11);
                                 setState(261);
+
                                 idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
-                                //TODO not arguman of class
                                 symbolTable.addId(id,idType);
 
                                 match(TYPE);
@@ -1381,14 +1385,19 @@ public class pass2Parser extends Parser {
                         {
                             {
                                 setState(277);
+
                                 String id=getCurrentToken().getText();
                                 if(symbolTable.getMethodScope().formalExists(id))
                                     ErrorHandler.invalidIdRedefined(getCurrentToken());
+
                                 match(OBJECT);
                                 setState(278); match(T__11);
                                 setState(279);
+
                                 Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
                                 symbolTable.addId(id,idType);
+                                //TODO what happened if repeted variable defined
+
                                 match(TYPE);
                                 setState(280); match(T__16);
                                 setState(281); expr();
@@ -1409,13 +1418,15 @@ public class pass2Parser extends Parser {
                     //System.out.println("14");
                     setState(291); match(NEW);
                     setState(292);
+
                     String idType=getCurrentToken().getText();
                     if(idType=="SELF_TYPE")
                         _localctx.setType(symbolTable.getClassScope());
-                    else if(symbolTable.getInheritanceGraph().typeExists(idType))
+                    else if(! symbolTable.getInheritanceGraph().typeExists(idType))
                         ErrorHandler.noSuchType(getCurrentToken());
                     else
                         _localctx.setType(symbolTable.getInheritanceGraph().getType(idType));
+
                     match(TYPE);
                 }
                 break;
@@ -1433,6 +1444,7 @@ public class pass2Parser extends Parser {
                 {
                     //System.out.println("26");
                     setState(299);
+
                     String id=getCurrentToken().getText();
                     Type idType= symbolTable.lookup(id);
                     if(idType==null) {
@@ -1442,6 +1454,7 @@ public class pass2Parser extends Parser {
                         else
                             _localctx.setType(attribute.getType());
                     }
+
                     match(OBJECT);
                 }
                 break;

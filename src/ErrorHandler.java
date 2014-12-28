@@ -67,8 +67,9 @@ public class ErrorHandler {
     }
 
     public static void invalidIdRedefined(Token token) {
-        System.out.println("variable "+token.getText()+" is defined in this scope before");
+        System.out.println("variable "+token.getText()+" is redefined in this scope");
         printTokenLine(token);
+        anyError=true;
     }
     public static void noSuchVar(Token token) {
         System.out.println("variable " + token.getText());
