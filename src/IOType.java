@@ -2,7 +2,7 @@
  * Created by sina on 12/27/14.
  */
 public class IOType extends Type {
-    public IOType() {
+    public IOType() throws Pass2Error {
         super("IO");
         setInheritable(true);
 

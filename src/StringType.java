@@ -2,7 +2,7 @@
  * Created by sina on 12/27/14.
  */
 public class StringType extends Type {
-    public StringType() {
+    public StringType() throws Pass2Error {
         super("String");
         setInheritable(false);
         

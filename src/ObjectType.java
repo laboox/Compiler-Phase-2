@@ -2,7 +2,7 @@
  * Created by sina on 12/27/14.
  */
 public class ObjectType extends Type {
-    public ObjectType() {
+    public ObjectType() throws Pass2Error {
         super("Object");
         setInheritable(true);
         Method abort = new Method("abort");

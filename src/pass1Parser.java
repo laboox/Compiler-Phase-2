@@ -80,7 +80,7 @@ public class pass1Parser extends Parser {
         }
     }
 
-    public final CoolContext cool() throws RecognitionException {
+    public final CoolContext cool() throws RecognitionException, Pass2Error {
         CoolContext _localctx = new CoolContext(_ctx, getState());
         enterRule(_localctx, 0, RULE_cool);
         try {
@@ -121,7 +121,7 @@ public class pass1Parser extends Parser {
         }
     }
 
-    public final ProgramContext program() throws RecognitionException {
+    public final ProgramContext program() throws RecognitionException, Pass2Error {
         ProgramContext _localctx = new ProgramContext(_ctx, getState());
         enterRule(_localctx, 2, RULE_program);
         int _la;
@@ -183,7 +183,7 @@ public class pass1Parser extends Parser {
         }
     }
 
-    public final ClasContext clas() throws RecognitionException {
+    public final ClasContext clas() throws RecognitionException, Pass2Error {
         ClasContext _localctx = new ClasContext(_ctx, getState());
         enterRule(_localctx, 4, RULE_clas);
         int _la;
@@ -263,7 +263,7 @@ public class pass1Parser extends Parser {
         }
     }
 
-    public final FeatureContext feature() throws RecognitionException {
+    public final FeatureContext feature() throws RecognitionException, Pass2Error {
         FeatureContext _localctx = new FeatureContext(_ctx, getState());
         enterRule(_localctx, 6, RULE_feature);
         int _la;

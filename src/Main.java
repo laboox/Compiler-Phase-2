@@ -30,10 +30,10 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CommonTokenStream tokens2 = new CommonTokenStream(lexer2);
 
+        try {
         typesGraph = new InheritanceGraph();
         pass1Parser pass1 = new pass1Parser(tokens, typesGraph);
         pass1.cool();
-        try {
             typesGraph.completeGraph();
         } catch (Pass2Error pass2Error) {
         }

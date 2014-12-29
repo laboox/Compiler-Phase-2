@@ -11,7 +11,7 @@ public class InheritanceGraph {
 
     Stack<Type> head;
 
-    public InheritanceGraph() {
+    public InheritanceGraph() throws Pass2Error {
         types = new ArrayList<Type>();
         Type Obj = new ObjectType();
         types.add(Obj);
@@ -288,7 +288,7 @@ public class InheritanceGraph {
         }
     }
 
-    public void addToHead(Method method) {
+    public void addToHead(Method method) throws Pass2Error {
         head.peek().addMethod(method);
     }
 
