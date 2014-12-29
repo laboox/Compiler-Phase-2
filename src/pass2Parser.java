@@ -477,6 +477,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitNot(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final NotContext not() throws RecognitionException, Pass2Error {
@@ -546,6 +554,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitComp(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final CompContext comp() throws RecognitionException, Pass2Error {
@@ -588,6 +604,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitComp2(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final Comp2Context comp2() throws RecognitionException, Pass2Error {
@@ -599,28 +623,68 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("21");
+                    //System.out.println("21");
                     setState(118); match(T__8);
-                    setState(119); addsub();
-                    setState(120); comp2();
+                    setState(119);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = addsub().getType();
+
+                    setState(120); ;
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = comp2().getType();
+
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getBoolType());
+
                 }
                 break;
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("22");
+                    //System.out.println("22");
                     setState(123); match(T__5);
-                    setState(124); addsub();
-                    setState(125); comp2();
+                    setState(124);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = addsub().getType();
+
+                    setState(125);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = comp2().getType();
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getBoolType());
+
                 }
                 break;
                 case 3:
                     enterOuterAlt(_localctx, 3);
                 {
-                    System.out.println("23");
+                    //System.out.println("23");
                     setState(128); match(T__7);
-                    setState(129); addsub();
-                    setState(130); comp2();
+                    setState(129);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = addsub().getType();
+
+                    setState(130);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = comp2().getType();
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getBoolType());
+
                 }
                 break;
                 case 4:
@@ -660,6 +724,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitAddsub(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final AddsubContext addsub() throws RecognitionException, Pass2Error {
@@ -668,8 +740,14 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(135); muldiv();
-                setState(136); addsub2();
+                setState(135);
+                _localctx.setType( muldiv().getType());
+                setState(136);
+
+
+                Type addType=addsub2().getType();
+                if(addType!=null)
+                    _localctx.setType(symbolTable.getTypes().getIntType());
             }
         }
         catch (RecognitionException re) {
@@ -702,6 +780,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitAddsub2(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final Addsub2Context addsub2() throws RecognitionException, Pass2Error {
@@ -713,10 +799,23 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("16");
+                    //System.out.println("16");
                     setState(139); match(T__14);
-                    setState(140); muldiv();
-                    setState(141); addsub2();
+                    setState(140);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = muldiv().getType();
+
+                    setState(141);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = addsub2().getType();
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getIntType());
+
                 }
                 break;
                 case 2:
@@ -724,8 +823,22 @@ public class pass2Parser extends Parser {
                 {
                     System.out.println("17");
                     setState(144); match(T__13);
-                    setState(145); muldiv();
-                    setState(146); addsub2();
+                    setState(145);
+
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = muldiv().getType();
+
+                    setState(146);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = addsub2().getType();
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getIntType());
+
                 }
                 break;
                 case 3:
@@ -765,6 +878,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitMuldiv(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final MuldivContext muldiv() throws RecognitionException, Pass2Error {
@@ -773,8 +894,12 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(151); voidd();
-                setState(152); muldiv2();
+                setState(151);
+                _localctx.setType(voidd().getType());
+                setState(152);
+                Type mulType=muldiv2().getType();
+                if(mulType!=null)
+                    _localctx.setType(symbolTable.getTypes().getIntType());
             }
         }
         catch (RecognitionException re) {
@@ -807,6 +932,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitMuldiv2(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final Muldiv2Context muldiv2() throws RecognitionException, Pass2Error {
@@ -818,19 +951,44 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("18");
+                    //System.out.println("18");
                     setState(155); match(T__12);
-                    setState(156); voidd();
-                    setState(157); muldiv2();
+                    setState(156);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = voidd().getType();
+
+                    setState(157);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = muldiv2().getType();
+
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getIntType());
+
                 }
                 break;
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("19");
+                    //System.out.println("19");
                     setState(160); match(T__3);
-                    setState(161); voidd();
-                    setState(162); muldiv2();
+                    setState(161);
+
+                    Token t1=getCurrentToken();
+                    Type e1Type = voidd().getType();
+
+                    setState(162);
+
+                    Token t2=getCurrentToken();
+                    Type e2Type = muldiv2().getType();
+                    if(! e1Type.getName().equals(symbolTable.getTypes().getIntType()) || ! e2Type.getName().equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.biopErr(t1, t2, e1Type.getName(), e2Type.getName());
+                    else
+                        _localctx.setType(symbolTable.getTypes().getIntType());
+
                 }
                 break;
                 case 3:
@@ -871,6 +1029,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitVoidd(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final VoiddContext voidd() throws RecognitionException, Pass2Error {
@@ -882,9 +1048,10 @@ public class pass2Parser extends Parser {
                 case ISVOID:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("15");
+                    //System.out.println("15");
                     setState(168); match(ISVOID);
                     setState(169); voidd();
+                    _localctx.setType(symbolTable.getTypes().getBoolType());
                 }
                 break;
                 case T__10:
@@ -902,7 +1069,8 @@ public class pass2Parser extends Parser {
                 case STRING:
                     enterOuterAlt(_localctx, 2);
                 {
-                    setState(170); target();
+                    setState(170);
+                    _localctx.setType(target().getType());
                 }
                 break;
                 default:
@@ -939,6 +1107,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitTarget(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final TargetContext target() throws RecognitionException, Pass2Error {
@@ -950,9 +1126,15 @@ public class pass2Parser extends Parser {
                 case T__2:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("20");
+                    //System.out.println("20");
                     setState(174); match(T__2);
-                    setState(175); target();
+                    setState(175);
+
+                    Type targetType=target().getType();
+                    if(! targetType.getName().equals("Int"))
+                        ErrorHandler.targetErr();
+                    else
+                        _localctx.setType(symbolTable.getTypes().getIntType());
                 }
                 break;
                 case T__10:
@@ -969,7 +1151,8 @@ public class pass2Parser extends Parser {
                 case STRING:
                     enterOuterAlt(_localctx, 2);
                 {
-                    setState(176); call();
+                    setState(176);
+                    _localctx.setType(call().getType());
                 }
                 break;
                 default:
@@ -1006,6 +1189,15 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitCall(this);
         }
+
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final CallContext call() throws RecognitionException, Pass2Error {
@@ -1014,8 +1206,17 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(179); func();
-                setState(180); call2();
+                setState(179);
+
+                Type callerType=func().getType();
+
+                setState(180);
+
+                Type ret=call2(callerType).getType();
+                if(ret==null)
+                    _localctx.setType(callerType);
+                else
+                    _localctx.setType(ret);
             }
         }
         catch (RecognitionException re) {
@@ -1037,7 +1238,7 @@ public class pass2Parser extends Parser {
         public ExprContext expr(int i) {
             return getRuleContext(ExprContext.class,i);
         }
-        public Call2Context call2() {
+        public Call2Context call2(Type callerType) {
             return getRuleContext(Call2Context.class,0);
         }
         public TerminalNode TYPE() { return getToken(pass2Parser.TYPE, 0); }
@@ -1053,9 +1254,16 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitCall2(this);
         }
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
-    public final Call2Context call2() throws RecognitionException, Pass2Error {
+    public final Call2Context call2(Type callerType) throws RecognitionException, Pass2Error {
         Call2Context _localctx = new Call2Context(_ctx, getState());
         enterRule(_localctx, 32, RULE_call2);
         int _la;
@@ -1065,24 +1273,47 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("7");
+                    //System.out.println("7");
                     setState(185);
                     _la = _input.LA(1);
                     if (_la==T__9) {
                         {
                             setState(183); match(T__9);
-                            setState(184); match(TYPE);
+                            setState(184);
+
+                            Token token=getCurrentToken();
+                            callerType=symbolTable.getTypes().getType(token.getText());
+                            if(callerType==null)
+                                ErrorHandler.noSuchType(token, true);
+
+                            match(TYPE);
                         }
                     }
 
                     setState(187); match(T__17);
-                    setState(188); match(OBJECT);
+                    setState(188);
+
+                    Token token=getCurrentToken();
+                    Method method=symbolTable.getTypes().getMethodDFS(callerType,token.getText());
+                    if(method==null)
+                        ErrorHandler.noSuchMethod(token);
+                    else
+                        _localctx.setType(method.returnType);
+                    int ind=0;
+
+
+                    match(OBJECT);
                     setState(189); match(T__10);
                     setState(198);
                     _la = _input.LA(1);
                     if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__10) | (1L << T__4) | (1L << T__2) | (1L << IF) | (1L << ISVOID) | (1L << LET) | (1L << WHILE) | (1L << CASE) | (1L << NEW) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << INTEGER) | (1L << OBJECT) | (1L << STRING))) != 0)) {
                         {
-                            setState(190); expr();
+                            setState(190);
+
+                            Type argType= expr().getType();
+                            if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                ErrorHandler.invalidArgType(getCurrentToken());
+
                             setState(195);
                             _errHandler.sync(this);
                             _la = _input.LA(1);
@@ -1090,7 +1321,12 @@ public class pass2Parser extends Parser {
                                 {
                                     {
                                         setState(191); match(T__15);
-                                        setState(192); expr();
+                                        setState(192);
+
+                                        argType= expr().getType();
+                                        if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                            ErrorHandler.invalidArgType(getCurrentToken());
+
                                     }
                                 }
                                 setState(197);
@@ -1101,7 +1337,11 @@ public class pass2Parser extends Parser {
                     }
 
                     setState(200); match(T__18);
-                    setState(201); call2();
+                    setState(201);
+
+                    Type nextType=call2(_localctx.getType()).getType();
+                    if(nextType!=null);
+                        _localctx.setType(nextType);
                 }
                 break;
                 case 2:
@@ -1216,7 +1456,8 @@ public class pass2Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    setState(219); end();
+                    setState(219);
+                    _localctx.setType(end().getType());
                 }
                 break;
             }
