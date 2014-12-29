@@ -90,7 +90,7 @@ public class InheritanceGraph {
         }
     }
 
-    public void completeGraph(){
+    public void completeGraph() throws Pass2Error {
         for(Type n: types){
             if(n.getFather()==null && !n.matchName("Object")){
                 Type father = null;
@@ -119,7 +119,7 @@ public class InheritanceGraph {
                     }
                 }
                 if(atType==null && !a.getType().isSelfType()){
-                    ErrorHandler.noSuchType(a.getToken());
+                    ErrorHandler.noSuchType(a.getToken(),false);
                 }
                 else if(atType!=null){
                     a.setType(atType);
@@ -134,7 +134,7 @@ public class InheritanceGraph {
                     }
                 }
                 if(atType==null && !m.getReturnType().isSelfType()){
-                    ErrorHandler.noSuchType(m.getToken());
+                    ErrorHandler.noSuchType(m.getToken(),false);
                 }
                 else if(atType!=null){
                     m.setReturnType(atType);
@@ -299,11 +299,11 @@ public class InheritanceGraph {
         head.peek().addAttribute(attribute);
     }
 
-    public Method getMethodDFS(Type type, String meth){
+    public Method getMethodDFS(Type type, String method){
         Type t = getType(type.getName());
         while(!t.equals(types.get(0))){
-            if(t.getMethod(meth)!=null){
-                return t.getMethod(meth);
+            if(t.getMethod(method)!=null){
+                return t.getMethod(method);
             }
             t = t.getFather();
         }
