@@ -65,10 +65,17 @@ public class ErrorHandler {
         anyError =true;
     }
 
+    static void conditionErr(Token t) {
+        printTokenLine(t);
+        System.out.println("condition must has Bool type");
+        System.out.println();
+        anyError=true;
+    }
+
     public static void noSuchType(Token token) {
         System.out.println("type of");
         printTokenLine(token);
-        System.out.println("is not exist.");
+        System.out.println("not exists.");
         System.out.println();
         anyError =true;
     }

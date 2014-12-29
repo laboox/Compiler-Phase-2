@@ -40,6 +40,7 @@ target  : 	{System.out.println("20");}	'~'target
 		| 	call;
 		
 call	: 	func call2;
+
 call2	: 	{System.out.println("7");}	('@' TYPE)? '.' OBJECT '(' (expr (',' expr)*)? ')' call2
 		|	;
 

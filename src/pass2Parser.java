@@ -274,6 +274,12 @@ public class pass2Parser extends Parser {
                     //System.out.println("3");
                     {
                         setState(67);
+                        /*System.out.println("SET METHOD");
+                        System.out.println("line "+getCurrentToken().getLine());
+                        System.out.println(symbolTable.getClassScope().getName());
+                        System.out.println(getCurrentToken().getText());
+                        System.out.println(symbolTable.getClassScope().getMethod(getCurrentToken().getText())+" in ");
+                        */
                         symbolTable.setMethodScope(symbolTable.getClassScope().getMethod(getCurrentToken().getText()));
                         match(OBJECT);
                         setState(68); match(T__10);
@@ -1139,6 +1145,14 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitFunc(this);
         }
+
+        public Type getType() {
+            return type;
+        }
+        public void setType(Type type) {
+            this.type = type;
+        }
+        private Type type;
     }
 
     public final FuncContext func() throws RecognitionException {
@@ -1151,8 +1165,13 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("8");
-                    setState(206); match(OBJECT);
+                    //System.out.println("8");
+                    setState(206);
+
+                    //Token token=getCurrentToken();
+                    //if()
+
+                    match(OBJECT);
                     setState(207); match(T__10);
                     setState(216);
                     _la = _input.LA(1);
@@ -1242,6 +1261,7 @@ public class pass2Parser extends Parser {
         public void exitRule(ParseTreeListener listener) {
             if ( listener instanceof cool2Listener ) ((cool2Listener)listener).exitEnd(this);
         }
+
         public Type getType() {
             return type;
         }
@@ -1261,39 +1281,63 @@ public class pass2Parser extends Parser {
                 case IF:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("9");
+                    //System.out.println("9");
                     setState(223); match(IF);
-                    setState(224); expr();
+                    setState(224);
+
+                    Type condType=expr().getType();
+                    System.out.println("TEST");
+                    System.out.println(getCurrentToken().getLine());
+                    System.out.println(getCurrentToken().getText());
+                    if(condType==null)
+                        System.out.println("Here");
+                    System.out.println(condType.getName());
+                    if(! condType.matchName("Bool"))
+                        ErrorHandler.conditionErr(getCurrentToken());
+
                     setState(225); match(THEN);
-                    setState(226); expr();
+                    setState(226);
+                    Type thenType=expr().getType();
                     setState(227); match(ELSE);
-                    setState(228); expr();
+                    setState(228);
+                    Type elseType=expr().getType();
                     setState(229); match(FI);
+
+                    _localctx.setType(symbolTable.getTypes().grandMate(elseType,thenType));
                 }
                 break;
                 case WHILE:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("10");
+                    //System.out.println("10");
                     setState(232); match(WHILE);
-                    setState(233); expr();
+                    setState(233);
+
+                    Type condType=expr().getType();
+                    if(! condType.matchName("Bool"))
+                        ErrorHandler.conditionErr(getCurrentToken());
+
                     setState(234); match(LOOP);
                     setState(235); expr();
                     setState(236); match(POOL);
+                    _localctx.setType(symbolTable.getTypes().getObjectType());
                 }
                 break;
                 case T__4:
                     enterOuterAlt(_localctx, 3);
                 {
-                    System.out.println("11");
+                    //System.out.println("11");
                     setState(239); match(T__4);
                     setState(243);
                     _errHandler.sync(this);
                     _la = _input.LA(1);
+
+                    Type expeType;
                     do {
                         {
                             {
-                                setState(240); expr();
+                                setState(240);
+                                expeType=expr().getType();
                                 setState(241); match(T__6);
                             }
                         }
@@ -1302,6 +1346,8 @@ public class pass2Parser extends Parser {
                         _la = _input.LA(1);
                     } while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__10) | (1L << T__4) | (1L << T__2) | (1L << IF) | (1L << ISVOID) | (1L << LET) | (1L << WHILE) | (1L << CASE) | (1L << NEW) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << INTEGER) | (1L << OBJECT) | (1L << STRING))) != 0) );
                     setState(247); match(T__1);
+
+                    _localctx.setType(expeType);
                 }
                 break;
                 case LET:
@@ -1314,8 +1360,17 @@ public class pass2Parser extends Parser {
 
                     Token token=getCurrentToken();
                     String id=token.getText();
+
                     if(symbolTable.getMethodScope().formalExists(id))
                         ErrorHandler.invalidIdRedefined(token);
+
+                    /*System.out.println("test");
+                    System.out.println(token.getLine());
+                    if(symbolTable.getMethodScope()==null)
+                        System.out.println("here");
+                    System.out.println(symbolTable.getMethodScope().getName());
+                    */
+
 
                     match(OBJECT);
                     setState(252); match(T__11);
@@ -1393,11 +1448,14 @@ public class pass2Parser extends Parser {
                     symbolTable.enterScope();
                     //System.out.println("13");
                     setState(274); match(CASE);
-                    setState(275); expr();
+                    setState(275);
+                    expr();
+                    //TODO expr isvoid ...
                     setState(276); match(OF);
                     setState(284);
                     _errHandler.sync(this);
                     _la = _input.LA(1);
+
                     do {
                         {
                             {
@@ -1417,7 +1475,13 @@ public class pass2Parser extends Parser {
 
                                 match(TYPE);
                                 setState(280); match(T__16);
-                                setState(281); expr();
+                                setState(281);
+
+                                Type exprType=expr().getType();
+                                if (_localctx.getType()==null)
+                                    _localctx.setType(exprType);
+                                else
+                                    _localctx.setType(symbolTable.getTypes().grandMate(exprType, _localctx.getType()));
                                 setState(282); match(T__6);
                             }
                         }
