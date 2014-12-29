@@ -449,7 +449,7 @@ public class pass2Parser extends Parser {
                     setState(104);
                     Type exprType=expr().getType();
                     if(! symbolTable.getTypes().isFather(idType, exprType))
-                        ErrorHandler.notAncsor(token, idType, exprType);
+                        ErrorHandler.notAncestor(token, idType, exprType);
                     else
                         _localctx.setType(exprType);
                 }
@@ -1320,7 +1320,7 @@ public class pass2Parser extends Parser {
                             if(declaredrType==null)
                                 ErrorHandler.noSuchType(token, true);
                             else if(! symbolTable.getTypes().isFather(declaredrType, callerType))
-                                ErrorHandler.esm(getCurrentToken(), declaredrType, callerType);
+                                ErrorHandler.notAncestor(getCurrentToken(), declaredrType, callerType);
 
                             match(TYPE);
                         }
