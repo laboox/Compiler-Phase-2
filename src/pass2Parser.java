@@ -570,7 +570,10 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                setState(114); addsub();
+                setState(114);
+
+                _localctx.setType( addsub().getType());
+
                 setState(115); comp2();
             }
         }
