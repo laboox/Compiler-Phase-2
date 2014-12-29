@@ -366,7 +366,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final FormalContext formal() throws RecognitionException {
+    public final FormalContext formal() throws RecognitionException, Pass2Error {
         FormalContext _localctx = new FormalContext(_ctx, getState());
         enterRule(_localctx, 8, RULE_formal);
         try {
@@ -379,6 +379,8 @@ public class pass2Parser extends Parser {
                 setState(98); match(T__11);
                 setState(99);
                 Type type = symbolTable.getTypes().getType(getCurrentToken().getText());
+                if(type == null)
+                    ErrorHandler.noSuchType(getCurrentToken(),true);
                 symbolTable.addId(id, type);
                 match(TYPE);
             }
@@ -440,9 +442,18 @@ public class pass2Parser extends Parser {
                     if(id.equals("self"))
                         ErrorHandler.invalidSelfUsage(token,true);
 
-                    Type idType=symbolTable.lookup(id);
-                    if(idType==null)
-                        ErrorHandler.noSuchVar(token);
+                    Type idType = null;
+
+                    idType = symbolTable.lookup(id);
+                    //TODO can self be attriute of class
+                    if (idType == null) {
+                        Attribute attribute = symbolTable.getTypes().getAttributeDFS(symbolTable.getClassScope(), id);
+                        if (attribute == null)
+                            ErrorHandler.noSuchVar(getCurrentToken());
+                        else
+                            idType = attribute.getType();
+                    }
+
 
                     match(OBJECT);
                     setState(103); match(T__0);
@@ -601,8 +612,12 @@ public class pass2Parser extends Parser {
                 setState(115);
 
                 Type compType=comp2().getType();
-                if(compType!=null)
+
+                if(compType!=null) {
+                    if(! compType.equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.unopErr(getCurrentToken(), compType.getName());
                     _localctx.setType(symbolTable.getTypes().getBoolType());
+                }
 
             }
         }
@@ -668,7 +683,9 @@ public class pass2Parser extends Parser {
                     Type e2Type = comp2().getType();
 
 
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getBoolType());
@@ -690,7 +707,9 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = comp2().getType();
 
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getBoolType());
@@ -712,7 +731,9 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = comp2().getType();
 
-                    if(!(        (e1Type.equals(symbolTable.getTypes().getIntType()) && e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(!( (e1Type.equals(symbolTable.getTypes().getIntType()) && e2Type.equals(symbolTable.getTypes().getIntType()))
                             || (e1Type.equals(symbolTable.getTypes().getStringType()) && e2Type.equals(symbolTable.getTypes().getStringType()))
                             || (e1Type.equals(symbolTable.getTypes().getBoolType()) && e2Type.equals(symbolTable.getTypes().getBoolType()))))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
@@ -778,10 +799,12 @@ public class pass2Parser extends Parser {
                 _localctx.setType( muldiv().getType());
                 setState(136);
 
-
                 Type addType=addsub2().getType();
-                if(addType!=null)
+                if(addType!=null) {
+                    if(! addType.equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.unopErr(getCurrentToken(), addType.getName());
                     _localctx.setType(symbolTable.getTypes().getIntType());
+                }
             }
         }
         catch (RecognitionException re) {
@@ -845,7 +868,9 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = addsub2().getType();
 
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getIntType());
@@ -868,7 +893,9 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = addsub2().getType();
 
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getIntType());
@@ -934,6 +961,8 @@ public class pass2Parser extends Parser {
                 Type mulType=muldiv2().getType();
                 if(mulType!=null) {
 
+                    if(! mulType.equals(symbolTable.getTypes().getIntType()))
+                        ErrorHandler.unopErr(getCurrentToken(), mulType.getName());
                     _localctx.setType(symbolTable.getTypes().getIntType());
                 }
             }
@@ -999,7 +1028,9 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = muldiv2().getType();
 
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1,t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getIntType());
@@ -1681,6 +1712,8 @@ public class pass2Parser extends Parser {
 
                     Type idType,exprType;
                     idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                    if(idType==null)
+                        ErrorHandler.noSuchType(getCurrentToken(),true);
                     symbolTable.addId(id, idType);
 
                     match(TYPE);
@@ -1719,6 +1752,8 @@ public class pass2Parser extends Parser {
                                 setState(261);
 
                                 idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                                if(idType==null)
+                                    ErrorHandler.noSuchType(getCurrentToken(),true);
                                 symbolTable.addId(id,idType);
 
                                 match(TYPE);
@@ -1779,6 +1814,8 @@ public class pass2Parser extends Parser {
                                 setState(279);
 
                                 Type idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                                if(idType==null)
+                                    ErrorHandler.noSuchType(getCurrentToken(),true);
                                 symbolTable.addId(id,idType);
                                 //TODO what happened if repeted variable defined
 
