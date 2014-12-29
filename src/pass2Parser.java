@@ -607,13 +607,19 @@ public class pass2Parser extends Parser {
             {
                 setState(114);
 
-                _localctx.setType(addsub().getType());
+               Type addType=addsub().getType();
+                _localctx.setType(addType);
 
                 setState(115);
 
-                Type compType=comp2().getType();
+                Comp2Context comp2Context=comp2();
+                Type compType=comp2Context.getType();
 
+                //System.out.println(addType.getName());
+                //System.out.println();(compType.getName());
                 if(compType!=null) {
+                    if(comp2Context.isEq && ! compType.equals(addType))
+                        ErrorHandler.unopErr(getCurrentToken(), compType.getName());
                     if(! compType.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.unopErr(getCurrentToken(), compType.getName());
                     _localctx.setType(symbolTable.getTypes().getBoolType());
@@ -659,6 +665,16 @@ public class pass2Parser extends Parser {
             this.type = type;
         }
         private Type type;
+        private boolean isEq=false;
+
+        public boolean isEq() {
+            return isEq;
+        }
+
+        public void setEq() {
+            isEq=true;
+        }
+
     }
 
     public final Comp2Context comp2() throws RecognitionException, Pass2Error {
@@ -730,6 +746,10 @@ public class pass2Parser extends Parser {
 
                     Token t2=getCurrentToken();
                     Type e2Type = comp2().getType();
+
+                    //System.out.println("e1Type "+e1Type);
+                    //System.out.println("e2Typ2 "+e2Type);
+                    _localctx.setEq();
 
                     if(e2Type==null)
                         _localctx.setType(e1Type);
@@ -1370,8 +1390,12 @@ public class pass2Parser extends Parser {
                     Method method=symbolTable.getTypes().getMethodDFS(callerType,token.getText());
                     if(method==null)
                         ErrorHandler.noSuchMethod(token);
-                    else
-                        _localctx.setType(method.returnType);
+                    else {
+                        if(method.returnType.matchName("SELF_TYPE"))
+                            _localctx.setType(symbolTable.getClassScope());
+                        else
+                            _localctx.setType(method.returnType);
+                    }
                     int ind=0;
 
 
@@ -1384,7 +1408,11 @@ public class pass2Parser extends Parser {
                             setState(190);
 
                             Type argType= expr().getType();
-                            if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                            Type formalType = method.getFormal(ind++).getType();
+                            if(formalType.matchName("SELF_TYPE"))
+                                formalType = symbolTable.getClassScope();
+
+                            if(! symbolTable.getTypes().isFather(formalType, argType))
                                 ErrorHandler.invalidArgType(getCurrentToken());
 
                             setState(195);
@@ -1397,7 +1425,10 @@ public class pass2Parser extends Parser {
                                         setState(192);
 
                                         argType= expr().getType();
-                                        if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                        Type formaType = method.getFormal(ind++).getType();
+                                        if(formalType.matchName("SELF_TYPE"))
+                                            formalType = symbolTable.getClassScope();
+                                        if(! symbolTable.getTypes().isFather(formalType, argType))
                                             ErrorHandler.invalidArgType(getCurrentToken());
 
                                     }
@@ -1498,7 +1529,10 @@ public class pass2Parser extends Parser {
                             setState(208);
 
                             Type argType= expr().getType();
-                            if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                            Type formalType = method.getFormal(ind++).getType();
+                            if(formalType.matchName("SELF_TYPE"))
+                                formalType = symbolTable.getClassScope();
+                            if(! symbolTable.getTypes().isFather(formalType, argType))
                                 ErrorHandler.invalidArgType(getCurrentToken());
 
                             setState(213);
@@ -1511,7 +1545,10 @@ public class pass2Parser extends Parser {
                                         setState(210);
 
                                         argType= expr().getType();
-                                        if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                        Type formalType2 = method.getFormal(ind++).getType();
+                                        if(formalType2.matchName("SELF_TYPE"))
+                                            formalType2 = symbolTable.getClassScope();
+                                        if(! symbolTable.getTypes().isFather(formalType2, argType))
                                             ErrorHandler.invalidArgType(getCurrentToken());
 
                                     }
@@ -1711,7 +1748,10 @@ public class pass2Parser extends Parser {
                     setState(253);
 
                     Type idType,exprType;
-                    idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                    String valType = getCurrentToken().getText();
+                    if(valType.equals("SELF_TYPE"))
+                        valType = symbolTable.getClassScope().getName();
+                    idType= symbolTable.getTypes().getType(valType);
                     if(idType==null)
                         ErrorHandler.noSuchType(getCurrentToken(),true);
                     symbolTable.addId(id, idType);
@@ -1751,7 +1791,10 @@ public class pass2Parser extends Parser {
                                 setState(260); match(T__11);
                                 setState(261);
 
-                                idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                                String letargType = getCurrentToken().getText();
+                                if(letargType.equals("SELF_TYPE"))
+                                    letargType = symbolTable.getClassScope().getName();
+                                idType= symbolTable.getTypes().getType(letargType);
                                 if(idType==null)
                                     ErrorHandler.noSuchType(getCurrentToken(),true);
                                 symbolTable.addId(id,idType);
@@ -1847,6 +1890,7 @@ public class pass2Parser extends Parser {
                     setState(292);
 
                     String declaredType=getCurrentToken().getText();
+
                     if(declaredType=="SELF_TYPE")
                         _localctx.setType(symbolTable.getClassScope());
                     else if(! symbolTable.getTypes().typeExists(declaredType))
