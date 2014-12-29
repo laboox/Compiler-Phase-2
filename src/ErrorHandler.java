@@ -35,10 +35,13 @@ public class ErrorHandler {
         int sc = t.getCharPositionInLine() +1;
         System.out.printf("in line: %d at char: %d\n%s\n",ln,sc,lines.get(ln-1));
         anyError =true;
-        /*for (int i = 0; i <sc ; i++) {
-            System.out.print(' ');
+        for (int i = 0; i <sc-1 ; i++) {
+            if(Character.isWhitespace(lines.get(ln-1).charAt(i)))
+                System.out.print(lines.get(ln - 1).charAt(i));
+            else
+                System.out.print(" ");
         }
-        System.out.println("^");*/
+        System.out.println("^");
     }
 
     static void noSuchParent(Type t){
@@ -50,11 +53,12 @@ public class ErrorHandler {
     }
 
     //TODO throw
-    static void typeErr(Token t) {
+    static void typeErr(Token t) throws Pass2Error {
         System.out.println("static type of expression doesn't conform to type of variable "+t.getText());
         printTokenLine(t);
         System.out.println();
         anyError=true;
+        throw new Pass2Error();
     }
     static void duplicateTypes(Type t1, Type t2){
         System.out.println("types");
@@ -65,35 +69,40 @@ public class ErrorHandler {
         anyError =true;
     }
 
-    static void conditionErr(Token t) {
+    static void conditionErr(Token t) throws Pass2Error {
         printTokenLine(t);
         System.out.println("condition must has Bool type");
         System.out.println();
         anyError=true;
+        throw new Pass2Error();
     }
 
-    public static void noSuchType(Token token) {
+    public static void noSuchType(Token token, Boolean dostop) throws Pass2Error {
         System.out.println("type of");
         printTokenLine(token);
         System.out.println("not exists.");
         System.out.println();
         anyError =true;
+        if(dostop)
+            throw new Pass2Error();
     }
 
     //TODO throw
-    public static void invalidIdRedefined(Token token) {
+    public static void invalidIdRedefined(Token token) throws Pass2Error {
         System.out.println("variable "+token.getText()+" is redefined in this scope");
         printTokenLine(token);
         anyError=true;
+        throw new Pass2Error();
     }
 
     //TODO throw
-    public static void noSuchVar(Token token) {
+    public static void noSuchVar(Token token) throws Pass2Error {
         System.out.println("variable " + token.getText());
         printTokenLine(token);
         System.out.println("is not defined in this scope.");
         System.out.println();
         anyError =true;
+        throw new Pass2Error();
     }
 
     public static void invalidFeatureRedefine(Feature f1, Feature f2){
