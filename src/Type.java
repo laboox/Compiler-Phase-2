@@ -35,6 +35,7 @@ public class Type implements Comparable{
         methods = new ArrayList<Method>();
         inheritable = true;
         fatherName = "Object";
+        empty = false;
     }
 
     public Type(String name, Type father) {
@@ -81,6 +82,15 @@ public class Type implements Comparable{
     private Type father;
     private Token token;
     private boolean inheritable;
+    private boolean empty;
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
+    }
 
     public boolean isInheritable() {
         return inheritable;
@@ -159,4 +169,6 @@ public class Type implements Comparable{
                 "father='" + ((father!=null)?father.getName():"null") + '\''+
                 '}';
     }
+
+
 }
