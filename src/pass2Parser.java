@@ -1387,7 +1387,7 @@ public class pass2Parser extends Parser {
                     setState(188);
 
                     Token token=getCurrentToken();
-                    Method method=symbolTable.getTypes().getMethodDFS(callerType,token.getText());
+                    Method method=symbolTable.getTypes().getMethodDFS(callerType, token.getText());
                     if(method==null)
                         ErrorHandler.noSuchMethod(token);
                     else {
