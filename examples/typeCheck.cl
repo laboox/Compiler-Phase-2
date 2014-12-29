@@ -5,8 +5,13 @@ Class B inherits A {
     c : SELF_TYPE;
 };
 Class C inherits B {
-    a(a:Int, d:String):String{
-        let d : String , a : String in d + a + w
+
+    k : A;
+
+    a(d:String):String{
+        case d of
+        	 a : A => a + d;
+        esac
     };
 };
 Class D inherits A {};

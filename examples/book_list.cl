@@ -43,10 +43,7 @@ Class Article inherits Book {
 };
 
 Class BookList inherits IO { 
-    (* Since abort "returns" type Object, we have to add
-       an expression of type Bool here to satisfy the typechecker.
-       This code is unreachable, since abort() halts the program.
-    *)
+
     isNil() : Bool { { abort(); true; } };
     
     cons(hd : Book) : Cons {
@@ -55,16 +52,10 @@ Class BookList inherits IO {
         )
     };
 
-    (* Since abort "returns" type Object, we have to add
-       an expression of type Book here to satisfy the typechecker.
-       This code is unreachable, since abort() halts the program.
-    *)
+
     car() : Book { { abort(); new Book; } };
     
-    (* Since abort "returns" type Object, we have to add
-       an expression of type BookList here to satisfy the typechecker.
-       This code is unreachable, since abort() halts the program.
-    *)
+
     cdr() : BookList { { abort(); new BookList; } };
     
     print_list() : Object { abort() };

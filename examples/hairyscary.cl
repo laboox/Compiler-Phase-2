@@ -50,7 +50,7 @@ class Bazz inherits IO {
      doh() : Int { (let i: Int <- h in { h <- h + 1; i; } ) };
 };
 
-(* scary . . . *)
+
 class Main {
   a : Bazz <- new Bazz;
   b : Foo <- new Foo;

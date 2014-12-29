@@ -327,15 +327,10 @@ class App inherits Expr {
   };
 };
 
-(*
- * Term: A class for building up terms
- *
- *)
+
 
 class Term inherits IO {
-  (*
-   * The basics
-   *)
+
   var(x : String) : Variable {
     let v : Variable <- new Variable in
       v.init(x)
@@ -351,9 +346,7 @@ class Term inherits IO {
       a.init(e1, e2)
   };
 
-  (*
-   * Some useful terms
-   *)
+
   i() : Expr {
     let x : Variable <- var("x") in
       lam(x,x)
@@ -374,11 +367,7 @@ class Term inherits IO {
 
 };
 
-(*
- *
- * The main method -- build up some lambda terms and try things out
- *
- *)
+
 
 class Main inherits Term {
   -- Beta-reduce an expression, printing out the term at each step
