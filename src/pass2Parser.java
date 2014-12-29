@@ -193,7 +193,7 @@ public class pass2Parser extends Parser {
                 System.out.println("2");
                 setState(49); match(CLASS);
 
-                symbolTable.setClassScope(symbolTable.getInheritanceGraph().getType(getCurrentToken().getText()));
+                symbolTable.setClassScope(symbolTable.getTypes().getType(getCurrentToken().getText()));
 
                 setState(50); match(TYPE);
                 setState(53);
@@ -372,7 +372,7 @@ public class pass2Parser extends Parser {
                 match(OBJECT);
                 setState(98); match(T__11);
                 setState(99);
-                Type type = symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                Type type = symbolTable.getTypes().getType(getCurrentToken().getText());
                 symbolTable.addId(id, type);
                 match(TYPE);
             }
@@ -1308,24 +1308,34 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 4);
                 {
                     symbolTable.enterScope();
-                    System.out.println("12");
+                    //System.out.println("12");
                     setState(250); match(LET);
                     setState(251);
-                    String id=getCurrentToken().getText();
-                    //if(! symbolTable.getMethodScope().isFormalExist(id))
+
+                    Token token=getCurrentToken();
+                    String id=token.getText();
+                    if(symbolTable.getMethodScope().formalExists(id))
+                        ErrorHandler.invalidIdRedefined(token);
 
                     match(OBJECT);
                     setState(252); match(T__11);
                     setState(253);
-                    Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+
+                    Type idType,exprType;
+                    idType= symbolTable.getTypes().getType(getCurrentToken().getText());
                     symbolTable.addId(id, idType);
+
                     match(TYPE);
                     setState(256);
                     _la = _input.LA(1);
                     if (_la==T__0) {
                         {
                             setState(254); match(T__0);
-                            setState(255); expr();
+                            setState(255);
+
+                            exprType=expr().getType();
+                            if(! symbolTable.getTypes().isFather(idType,exprType))
+                                ErrorHandler.typeErr(token);
                         }
                     }
 
@@ -1338,15 +1348,16 @@ public class pass2Parser extends Parser {
                                 setState(258); match(T__15);
                                 setState(259);
 
-                                id=getCurrentToken().getText();
+                                token=getCurrentToken();
+                                id=token.getText();
                                 if(symbolTable.getMethodScope().formalExists(id))
-                                    ErrorHandler.invalidIdRedefined(getCurrentToken());
+                                    ErrorHandler.invalidIdRedefined(token);
 
                                 match(OBJECT);
                                 setState(260); match(T__11);
                                 setState(261);
 
-                                idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                                idType= symbolTable.getTypes().getType(getCurrentToken().getText());
                                 symbolTable.addId(id,idType);
 
                                 match(TYPE);
@@ -1355,7 +1366,11 @@ public class pass2Parser extends Parser {
                                 if (_la==T__0) {
                                     {
                                         setState(262); match(T__0);
-                                        setState(263); expr();
+                                        setState(263);
+
+                                        exprType=expr().getType();
+                                        if(! symbolTable.getTypes().isFather(idType, exprType))
+                                            ErrorHandler.typeErr(token);
                                     }
                                 }
 
@@ -1366,7 +1381,9 @@ public class pass2Parser extends Parser {
                         _la = _input.LA(1);
                     }
                     setState(271); match(IN);
-                    setState(272); expr();
+                    setState(272);
+
+                    _localctx.setType(expr().getType());
                     symbolTable.exitScope();
                 }
                 break;
@@ -1374,7 +1391,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 5);
                 {
                     symbolTable.enterScope();
-                    System.out.println("13");
+                    //System.out.println("13");
                     setState(274); match(CASE);
                     setState(275); expr();
                     setState(276); match(OF);
@@ -1394,7 +1411,7 @@ public class pass2Parser extends Parser {
                                 setState(278); match(T__11);
                                 setState(279);
 
-                                Type idType= symbolTable.getInheritanceGraph().getType(getCurrentToken().getText());
+                                Type idType= symbolTable.getTypes().getType(getCurrentToken().getText());
                                 symbolTable.addId(id,idType);
                                 //TODO what happened if repeted variable defined
 
@@ -1419,13 +1436,13 @@ public class pass2Parser extends Parser {
                     setState(291); match(NEW);
                     setState(292);
 
-                    String idType=getCurrentToken().getText();
-                    if(idType=="SELF_TYPE")
+                    String declaredType=getCurrentToken().getText();
+                    if(declaredType=="SELF_TYPE")
                         _localctx.setType(symbolTable.getClassScope());
-                    else if(! symbolTable.getInheritanceGraph().typeExists(idType))
+                    else if(! symbolTable.getTypes().typeExists(declaredType))
                         ErrorHandler.noSuchType(getCurrentToken());
                     else
-                        _localctx.setType(symbolTable.getInheritanceGraph().getType(idType));
+                        _localctx.setType(symbolTable.getTypes().getType(declaredType));
 
                     match(TYPE);
                 }
@@ -1435,7 +1452,8 @@ public class pass2Parser extends Parser {
                 {
                     //System.out.println("25");
                     setState(294); match(T__10);
-                    setState(295); _localctx.setType(expr().getType());
+                    setState(295);
+                    _localctx.setType(expr().getType());
                     setState(296); match(T__18);
                 }
                 break;
@@ -1446,15 +1464,19 @@ public class pass2Parser extends Parser {
                     setState(299);
 
                     String id=getCurrentToken().getText();
-                    Type idType= symbolTable.lookup(id);
-                    if(idType==null) {
-                        Attribute attribute = symbolTable.getInheritanceGraph().getAttributeDFS(symbolTable.getClassScope(), id);
-                        if (attribute == null)
-                            ErrorHandler.noSuchVar(getCurrentToken());
-                        else
-                            _localctx.setType(attribute.getType());
+                    if(id.equals("self"))
+                        _localctx.setType(symbolTable.getClassScope());
+                    else {
+                        Type idType = symbolTable.lookup(id);
+                        //TODO can self be attriute of class
+                        if (idType == null) {
+                            Attribute attribute = symbolTable.getTypes().getAttributeDFS(symbolTable.getClassScope(), id);
+                            if (attribute == null)
+                                ErrorHandler.noSuchVar(getCurrentToken());
+                            else
+                                _localctx.setType(attribute.getType());
+                        }
                     }
-
                     match(OBJECT);
                 }
                 break;
@@ -1463,7 +1485,7 @@ public class pass2Parser extends Parser {
                 {
                     //System.out.println("27");
                     setState(301);
-                    _localctx.setType(symbolTable.getInheritanceGraph().getType("Int"));
+                    _localctx.setType(symbolTable.getTypes().getType("Int"));
                     match(INTEGER);
                 }
                 break;
@@ -1471,7 +1493,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 10);
                 {
                     //System.out.println("28");
-                    _localctx.setType(symbolTable.getInheritanceGraph().getType("String"));
+                    _localctx.setType(symbolTable.getTypes().getType("String"));
                     setState(303); match(STRING);
                 }
                 break;
@@ -1479,7 +1501,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 11);
                 {
                     //System.out.println("29");
-                    _localctx.setType(symbolTable.getInheritanceGraph().getType("Bool"));
+                    _localctx.setType(symbolTable.getTypes().getType("Bool"));
                     setState(305); match(TRUE);
                 }
                 break;
@@ -1487,7 +1509,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 12);
                 {
                     //System.out.println("30");
-                    _localctx.setType(symbolTable.getInheritanceGraph().getType("Bool"));
+                    _localctx.setType(symbolTable.getTypes().getType("Bool"));
                     setState(307); match(FALSE);
                 }
                 break;

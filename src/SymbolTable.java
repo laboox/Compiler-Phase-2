@@ -9,9 +9,9 @@ public class SymbolTable {
     private Stack tbl;
     private Type classScope;
     private Method methodScope;
-    private InheritanceGraph inheritanceGraph;
+    private InheritanceGraph types;
 
-    public InheritanceGraph getInheritanceGraph() { return inheritanceGraph; }
+    public InheritanceGraph getTypes() { return types; }
 
     public Type getClassScope() {
         return classScope;
@@ -30,10 +30,10 @@ public class SymbolTable {
     }
 
     /** Creates an empty symbol table. */
-    public SymbolTable(InheritanceGraph inheritanceGraph)
+    public SymbolTable(InheritanceGraph types)
     {
         tbl = new Stack();
-        this.inheritanceGraph = inheritanceGraph;
+        this.types = types;
     }
 
     /** Enters a new scope. A scope must be entered before anything

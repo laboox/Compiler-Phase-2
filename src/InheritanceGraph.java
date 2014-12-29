@@ -224,7 +224,7 @@ public class InheritanceGraph {
         return (getType(name)==null);
     }
 
-    public boolean isFather(Type child, Type father){
+    public boolean isFather(Type father, Type child){
         child = getType(child.getName());
         father = getType(father.getName());
         if(father.equals(types.get(0)))

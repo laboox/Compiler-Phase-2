@@ -49,6 +49,13 @@ public class ErrorHandler {
         anyError =true;
     }
 
+    //TODO throw
+    static void typeErr(Token t) {
+        System.out.println("static type of expression doesn't conform to type of variable "+t.getText());
+        printTokenLine(t);
+        System.out.println();
+        anyError=true;
+    }
     static void duplicateTypes(Type t1, Type t2){
         System.out.println("types");
         printTokenLine(t1.getToken());
@@ -66,11 +73,14 @@ public class ErrorHandler {
         anyError =true;
     }
 
+    //TODO throw
     public static void invalidIdRedefined(Token token) {
         System.out.println("variable "+token.getText()+" is redefined in this scope");
         printTokenLine(token);
         anyError=true;
     }
+
+    //TODO throw
     public static void noSuchVar(Token token) {
         System.out.println("variable " + token.getText());
         printTokenLine(token);
