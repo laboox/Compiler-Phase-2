@@ -114,10 +114,13 @@ public class Type implements Comparable{
         return name.equals(oName);
     }
 
-    public void addMethod(Method method) {
+    public void addMethod(Method method) throws Pass2Error {
         if(!methods.contains(method)) {
             if(method.haveRepeatedFormal()) {
                 return;
+            }
+            if(method.getFormal("self")!=null){
+                ErrorHandler.invalidSelfUsage(method.getFormal("self").getToken(),false);
             }
             methods.add(method);
         }

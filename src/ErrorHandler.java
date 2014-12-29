@@ -198,4 +198,13 @@ public class ErrorHandler {
         anyError = true;
         throw new Pass2Error();
     }
+
+    public static void invalidSelfUsage(Token t, boolean dostop) throws Pass2Error {
+        System.out.println("invalid use of self word");
+        printTokenLine(t);
+        System.out.println();
+        anyError = true;
+        if(dostop)
+            throw new Pass2Error();
+    }
 }
