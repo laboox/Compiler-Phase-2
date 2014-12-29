@@ -128,7 +128,7 @@ public class pass1Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                //System.out.println("1");
+                ////System.out.println("1");
                 setState(44);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
@@ -190,7 +190,7 @@ public class pass1Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                //System.out.println("2");
+                //////System.out.println("2");
                 setState(49); match(CLASS);
                 String typeName = getCurrentToken().getText();
                 Token token = getCurrentToken();
@@ -273,7 +273,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("3");
+                    //////System.out.println("3");
                     {
                         setState(67);
                         Method method = new Method(getCurrentToken().getText());
@@ -317,7 +317,7 @@ public class pass1Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    //System.out.println("4");
+                    //////System.out.println("4");
                     {
 
                         setState(87);
@@ -378,7 +378,7 @@ public class pass1Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                //System.out.println("5");
+                //////System.out.println("5");
                 setState(97);
                 String name = getCurrentToken().getText();
                 Token token = getCurrentToken();
@@ -434,7 +434,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("6");
+                    ////System.out.println("6");
                     setState(102); match(OBJECT);
                     setState(103); match(T__0);
                     setState(104); expr();
@@ -490,7 +490,7 @@ public class pass1Parser extends Parser {
                 case NOT:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("24");
+                    ////System.out.println("24");
                     setState(109); match(NOT);
                     setState(110); not();
                 }
@@ -601,7 +601,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("21");
+                    ////System.out.println("21");
                     setState(118); match(T__8);
                     setState(119); addsub();
                     setState(120); comp2();
@@ -610,7 +610,7 @@ public class pass1Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("22");
+                    ////System.out.println("22");
                     setState(123); match(T__5);
                     setState(124); addsub();
                     setState(125); comp2();
@@ -619,7 +619,7 @@ public class pass1Parser extends Parser {
                 case 3:
                     enterOuterAlt(_localctx, 3);
                 {
-                    System.out.println("23");
+                    ////System.out.println("23");
                     setState(128); match(T__7);
                     setState(129); addsub();
                     setState(130); comp2();
@@ -715,7 +715,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("16");
+                    ////System.out.println("16");
                     setState(139); match(T__14);
                     setState(140); muldiv();
                     setState(141); addsub2();
@@ -724,7 +724,7 @@ public class pass1Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("17");
+                    ////System.out.println("17");
                     setState(144); match(T__13);
                     setState(145); muldiv();
                     setState(146); addsub2();
@@ -820,7 +820,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("18");
+                    ////System.out.println("18");
                     setState(155); match(T__12);
                     setState(156); voidd();
                     setState(157); muldiv2();
@@ -829,7 +829,7 @@ public class pass1Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("19");
+                    ////System.out.println("19");
                     setState(160); match(T__3);
                     setState(161); voidd();
                     setState(162); muldiv2();
@@ -884,7 +884,7 @@ public class pass1Parser extends Parser {
                 case ISVOID:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("15");
+                    ////System.out.println("15");
                     setState(168); match(ISVOID);
                     setState(169); voidd();
                 }
@@ -952,7 +952,7 @@ public class pass1Parser extends Parser {
                 case T__2:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("20");
+                    ////System.out.println("20");
                     setState(174); match(T__2);
                     setState(175); target();
                 }
@@ -1067,7 +1067,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("7");
+                    ////System.out.println("7");
                     setState(185);
                     _la = _input.LA(1);
                     if (_la==T__9) {
@@ -1159,7 +1159,7 @@ public class pass1Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("8");
+                    ////System.out.println("8");
                     setState(206); match(OBJECT);
                     setState(207); match(T__10);
                     setState(216);
@@ -1262,7 +1262,7 @@ public class pass1Parser extends Parser {
                 case IF:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("9");
+                    //System.out.println("9");
                     setState(223); match(IF);
                     setState(224); expr();
                     setState(225); match(THEN);
@@ -1275,7 +1275,7 @@ public class pass1Parser extends Parser {
                 case WHILE:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("10");
+                    //System.out.println("10");
                     setState(232); match(WHILE);
                     setState(233); expr();
                     setState(234); match(LOOP);
@@ -1286,7 +1286,7 @@ public class pass1Parser extends Parser {
                 case T__4:
                     enterOuterAlt(_localctx, 3);
                 {
-                    System.out.println("11");
+                    //System.out.println("11");
                     setState(239); match(T__4);
                     setState(243);
                     _errHandler.sync(this);
@@ -1308,7 +1308,7 @@ public class pass1Parser extends Parser {
                 case LET:
                     enterOuterAlt(_localctx, 4);
                 {
-                    System.out.println("12");
+                    //System.out.println("12");
                     setState(250); match(LET);
                     setState(251); match(OBJECT);
                     setState(252); match(T__11);
@@ -1354,7 +1354,7 @@ public class pass1Parser extends Parser {
                 case CASE:
                     enterOuterAlt(_localctx, 5);
                 {
-                    System.out.println("13");
+                    ////System.out.println("13");
                     setState(274); match(CASE);
                     setState(275); expr();
                     setState(276); match(OF);
@@ -1382,7 +1382,7 @@ public class pass1Parser extends Parser {
                 case NEW:
                     enterOuterAlt(_localctx, 6);
                 {
-                    System.out.println("14");
+                    //System.out.println("14");
                     setState(291); match(NEW);
                     setState(292); match(TYPE);
                 }
@@ -1390,7 +1390,7 @@ public class pass1Parser extends Parser {
                 case T__10:
                     enterOuterAlt(_localctx, 7);
                 {
-                    System.out.println("25");
+                    //System.out.println("25");
                     setState(294); match(T__10);
                     setState(295); expr();
                     setState(296); match(T__18);
@@ -1399,7 +1399,7 @@ public class pass1Parser extends Parser {
                 case OBJECT:
                     enterOuterAlt(_localctx, 8);
                 {
-                    System.out.println("26");
+                    //System.out.println("26");
                     setState(299); match(OBJECT);
                 }
                 break;
@@ -1413,21 +1413,21 @@ public class pass1Parser extends Parser {
                 case STRING:
                     enterOuterAlt(_localctx, 10);
                 {
-                    System.out.println("28");
+                    //System.out.println("28");
                     setState(303); match(STRING);
                 }
                 break;
                 case TRUE:
                     enterOuterAlt(_localctx, 11);
                 {
-                    System.out.println("29");
+                    //System.out.println("29");
                     setState(305); match(TRUE);
                 }
                 break;
                 case FALSE:
                     enterOuterAlt(_localctx, 12);
                 {
-                    System.out.println("30");
+                    //System.out.println("30");
                     setState(307); match(FALSE);
                 }
                 break;
