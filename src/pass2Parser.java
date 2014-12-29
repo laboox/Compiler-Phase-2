@@ -620,7 +620,7 @@ public class pass2Parser extends Parser {
                 if(compType!=null) {
                     if(comp2Context.isEq && ! compType.equals(addType))
                         ErrorHandler.unopErr(getCurrentToken(), compType.getName());
-                    if(! compType.equals(symbolTable.getTypes().getIntType()))
+                    else if(! comp2Context.isEq() && ! compType.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.unopErr(getCurrentToken(), compType.getName());
                     _localctx.setType(symbolTable.getTypes().getBoolType());
                 }
