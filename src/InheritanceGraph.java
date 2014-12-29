@@ -86,7 +86,7 @@ public class InheritanceGraph {
         if(!head.empty())
             head.pop();
         else {
-            //TODO: throw exsp
+            System.out.println("something strange is happening. :(");
         }
     }
 
@@ -124,7 +124,6 @@ public class InheritanceGraph {
                 else if(atType!=null){
                     a.setType(atType);
                 }
-                //TODO: self type check?
             }
             for(Method m:n.getMethods()){
                 Type atType = null;
@@ -139,7 +138,6 @@ public class InheritanceGraph {
                 else if(atType!=null){
                     m.setReturnType(atType);
                 }
-                //TODO: self type?
             }
         }
     }
@@ -222,7 +220,6 @@ public class InheritanceGraph {
                                     ret =  true;
                                 }
                             }
-                            //TODO: Aida, inja mishe fahmid ye tabe override shode ya na too pass badi shayad be dard bokhore
                         }
                     }
                 }

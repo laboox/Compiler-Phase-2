@@ -41,7 +41,7 @@ public class pass1Parser extends Parser {
 
     //User Defined fields here:
     InheritanceGraph typesGraph;
-    //TODO esme hich attribute o tabe o arguman e tabe i self nabashe
+
     @Override
     public String getGrammarFileName() { return "cool.g4"; }
 
