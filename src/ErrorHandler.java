@@ -164,6 +164,20 @@ public class ErrorHandler {
         System.out.println();
         anyError =true;
     }
+
+    public static void noSuchMethod(Token token) throws Pass2Error {
+        System.out.println("method");
+        printTokenLine(token);
+        System.out.println("not defines.");
+        throw new Pass2Error();
+    }
+
+    public static void invalidArgType(Token token) throws Pass2Error {
+        System.out.println("atgument");
+        printTokenLine(token);
+        System.out.println("is not valid.");
+        throw new Pass2Error();
+    }
     //TODO if exeption is for pass2 must throw or if is for both pass
     //TODO any error must be true
 

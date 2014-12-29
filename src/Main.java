@@ -33,7 +33,10 @@ public class Main {
         typesGraph = new InheritanceGraph();
         pass1Parser pass1 = new pass1Parser(tokens, typesGraph);
         pass1.cool();
-        typesGraph.completeGraph();
+        try {
+            typesGraph.completeGraph();
+        } catch (Pass2Error pass2Error) {
+        }
         if(!typesGraph.haveMain()){
             System.out.println("no main function found.");
             System.out.println();
@@ -54,6 +57,11 @@ public class Main {
 
         symbolTable = new SymbolTable(typesGraph);
         pass2Parser pass2 = new pass2Parser(tokens2, symbolTable);
-        pass2.cool();
+        try {
+            pass2.cool();
+        } catch (Pass2Error pass2Error) {
+            System.out.println("pass2 error comes. cant continue!");
+            System.exit(0);
+        }
     }
 }
