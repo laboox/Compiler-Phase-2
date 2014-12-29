@@ -22,6 +22,26 @@ public class InheritanceGraph {
         head = new Stack<Type>();
     }
 
+    public Type getObjectType(){
+        return types.get(0);
+    }
+
+    public Type getIOType(){
+        return types.get(1);
+    }
+
+    public Type getStringType(){
+        return types.get(2);
+    }
+
+    public Type getIntType(){
+        return types.get(3);
+    }
+
+    public Type getBoolType(){
+        return types.get(4);
+    }
+
     public void AddNode(String name, String parent, Token token){
         if(types.contains(new Type(name))){
             Type dupl = types.get(types.indexOf(new Type(name)));
