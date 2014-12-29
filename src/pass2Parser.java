@@ -128,7 +128,7 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                System.out.println("1");
+                //Sustem.out.println("1");
                 setState(44);
                 _errHandler.sync(this);
                 _la = _input.LA(1);
@@ -190,7 +190,7 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                System.out.println("2");
+                //Sustem.out.println("2");
                 setState(49); match(CLASS);
 
                 symbolTable.setClassScope(symbolTable.getTypes().getType(getCurrentToken().getText()));
@@ -271,14 +271,14 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 1);
                 {
                     symbolTable.enterScope();
-                    //System.out.println("3");
+                    ////Sustem.out.println("3");
                     {
                         setState(67);
-                        /*System.out.println("SET METHOD");
-                        System.out.println("line "+getCurrentToken().getLine());
-                        System.out.println(symbolTable.getClassScope().getName());
-                        System.out.println(getCurrentToken().getText());
-                        System.out.println(symbolTable.getClassScope().getMethod(getCurrentToken().getText())+" in ");
+                        /*//Sustem.out.println("SET METHOD");
+                        //Sustem.out.println("line "+getCurrentToken().getLine());
+                        //Sustem.out.println(symbolTable.getClassScope().getName());
+                        //Sustem.out.println(getCurrentToken().getText());
+                        //Sustem.out.println(symbolTable.getClassScope().getMethod(getCurrentToken().getText())+" in ");
                         */
                         symbolTable.setMethodScope(symbolTable.getClassScope().getMethod(getCurrentToken().getText()));
                         match(OBJECT);
@@ -319,7 +319,7 @@ public class pass2Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("4");
+                    //Sustem.out.println("4");
                     {
                         setState(87); match(OBJECT);
                         setState(88); match(T__11);
@@ -372,7 +372,7 @@ public class pass2Parser extends Parser {
         try {
             enterOuterAlt(_localctx, 1);
             {
-                //System.out.println("5");
+                ////Sustem.out.println("5");
                 setState(97);
                 String id = getCurrentToken().getText();
                 match(OBJECT);
@@ -432,7 +432,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("6");
+                    ////Sustem.out.println("6");
                     setState(102);
 
                     Token token=getCurrentToken();
@@ -513,7 +513,7 @@ public class pass2Parser extends Parser {
                 case NOT:
                     enterOuterAlt(_localctx, 1);
                 {
-                    System.out.println("24");
+                    //Sustem.out.println("24");
                     setState(109); match(NOT);
                     setState(110);
 
@@ -655,7 +655,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("21");
+                    ////Sustem.out.println("21");
                     setState(118); match(T__8);
                     setState(119);
 
@@ -678,7 +678,7 @@ public class pass2Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    //System.out.println("22");
+                    ////Sustem.out.println("22");
                     setState(123); match(T__5);
                     setState(124);
 
@@ -700,7 +700,7 @@ public class pass2Parser extends Parser {
                 case 3:
                     enterOuterAlt(_localctx, 3);
                 {
-                    //System.out.println("23");
+                    ////Sustem.out.println("23");
                     setState(128); match(T__7);
                     setState(129);
 
@@ -833,7 +833,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("16");
+                    ////Sustem.out.println("16");
                     setState(139); match(T__14);
                     setState(140);
 
@@ -855,7 +855,7 @@ public class pass2Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    System.out.println("17");
+                    //Sustem.out.println("17");
                     setState(144); match(T__13);
                     setState(145);
 
@@ -932,8 +932,10 @@ public class pass2Parser extends Parser {
                 _localctx.setType(voidd().getType());
                 setState(152);
                 Type mulType=muldiv2().getType();
-                if(mulType!=null)
+                if(mulType!=null) {
+
                     _localctx.setType(symbolTable.getTypes().getIntType());
+                }
             }
         }
         catch (RecognitionException re) {
@@ -985,7 +987,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("18");
+                    ////Sustem.out.println("18");
                     setState(155); match(T__12);
                     setState(156);
 
@@ -1007,7 +1009,7 @@ public class pass2Parser extends Parser {
                 case 2:
                     enterOuterAlt(_localctx, 2);
                 {
-                    //System.out.println("19");
+                    ////Sustem.out.println("19");
                     setState(160); match(T__3);
                     setState(161);
 
@@ -1018,7 +1020,10 @@ public class pass2Parser extends Parser {
 
                     Token t2=getCurrentToken();
                     Type e2Type = muldiv2().getType();
-                    if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
+
+                    if(e2Type==null)
+                        _localctx.setType(e1Type);
+                    else if(! e1Type.equals(symbolTable.getTypes().getIntType()) || ! e2Type.equals(symbolTable.getTypes().getIntType()))
                         ErrorHandler.biopErr(t1, t2, e1Type.getName(), e2Type.getName());
                     else
                         _localctx.setType(symbolTable.getTypes().getIntType());
@@ -1027,6 +1032,7 @@ public class pass2Parser extends Parser {
                 break;
                 case 3:
                     enterOuterAlt(_localctx, 3);
+                    //_localctx.setType(new EmptyType());
                 {
                 }
                 break;
@@ -1082,7 +1088,7 @@ public class pass2Parser extends Parser {
                 case ISVOID:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("15");
+                    ////Sustem.out.println("15");
                     setState(168); match(ISVOID);
                     setState(169); voidd();
                     _localctx.setType(symbolTable.getTypes().getBoolType());
@@ -1160,7 +1166,7 @@ public class pass2Parser extends Parser {
                 case T__2:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("20");
+                    ////Sustem.out.println("20");
                     setState(174); match(T__2);
                     setState(175);
 
@@ -1307,7 +1313,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("7");
+                    ////Sustem.out.println("7");
                     setState(185);
                     _la = _input.LA(1);
                     if (_la==T__9) {
@@ -1441,7 +1447,7 @@ public class pass2Parser extends Parser {
                 case 1:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("8");
+                    ////Sustem.out.println("8");
                     setState(206);
 
                     Token token=getCurrentToken();
@@ -1573,18 +1579,18 @@ public class pass2Parser extends Parser {
                 case IF:
                     enterOuterAlt(_localctx, 1);
                 {
-                    //System.out.println("9");
+                    ////Sustem.out.println("9");
                     setState(223); match(IF);
                     setState(224);
 
                     Type condType=expr().getType();
 
-                    /*System.out.println("TEST");
-                    System.out.println(getCurrentToken().getLine());
-                    System.out.println(getCurrentToken().getText());
+                    /*//Sustem.out.println("TEST");
+                    //Sustem.out.println(getCurrentToken().getLine());
+                    //Sustem.out.println(getCurrentToken().getText());
                     if(condType==null)
-                        System.out.println("Here");
-                    System.out.println(condType.getName());
+                        //Sustem.out.println("Here");
+                    //Sustem.out.println(condType.getName());
                     */
 
                     if(! condType.matchName("Bool"))
@@ -1604,7 +1610,7 @@ public class pass2Parser extends Parser {
                 case WHILE:
                     enterOuterAlt(_localctx, 2);
                 {
-                    //System.out.println("10");
+                    ////Sustem.out.println("10");
                     setState(232); match(WHILE);
                     setState(233);
 
@@ -1621,7 +1627,7 @@ public class pass2Parser extends Parser {
                 case T__4:
                     enterOuterAlt(_localctx, 3);
                 {
-                    //System.out.println("11");
+                    ////Sustem.out.println("11");
                     setState(239); match(T__4);
                     setState(243);
                     _errHandler.sync(this);
@@ -1649,7 +1655,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 4);
                 {
                     symbolTable.enterScope();
-                    //System.out.println("12");
+                    ////Sustem.out.println("12");
                     setState(250); match(LET);
                     setState(251);
 
@@ -1661,11 +1667,11 @@ public class pass2Parser extends Parser {
                     //if(symbolTable.getMethodScope().formalExists(id))
                     //    ErrorHandler.invalidIdRedefined(token);
 
-                    /*System.out.println("test");
-                    System.out.println(token.getLine());
+                    /*//Sustem.out.println("test");
+                    //Sustem.out.println(token.getLine());
                     if(symbolTable.getMethodScope()==null)
-                        System.out.println("here");
-                    System.out.println(symbolTable.getMethodScope().getName());
+                        //Sustem.out.println("here");
+                    //Sustem.out.println(symbolTable.getMethodScope().getName());
                     */
 
 
@@ -1746,7 +1752,7 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 5);
                 {
                     symbolTable.enterScope();
-                    //System.out.println("13");
+                    ////Sustem.out.println("13");
                     setState(274); match(CASE);
                     setState(275);
                     expr();
@@ -1799,7 +1805,7 @@ public class pass2Parser extends Parser {
                 case NEW:
                     enterOuterAlt(_localctx, 6);
                 {
-                    //System.out.println("14");
+                    ////Sustem.out.println("14");
                     setState(291); match(NEW);
                     setState(292);
 
@@ -1817,7 +1823,7 @@ public class pass2Parser extends Parser {
                 case T__10:
                     enterOuterAlt(_localctx, 7);
                 {
-                    //System.out.println("25");
+                    ////Sustem.out.println("25");
                     setState(294); match(T__10);
                     setState(295);
                     _localctx.setType(expr().getType());
@@ -1827,7 +1833,7 @@ public class pass2Parser extends Parser {
                 case OBJECT:
                     enterOuterAlt(_localctx, 8);
                 {
-                    //System.out.println("26");
+                    ////Sustem.out.println("26");
                     setState(299);
 
                     String id=getCurrentToken().getText();
@@ -1843,6 +1849,8 @@ public class pass2Parser extends Parser {
                             else
                                 _localctx.setType(attribute.getType());
                         }
+                        else
+                            _localctx.setType(idType);
                     }
                     match(OBJECT);
                 }
@@ -1850,7 +1858,7 @@ public class pass2Parser extends Parser {
                 case INTEGER:
                     enterOuterAlt(_localctx, 9);
                 {
-                    //System.out.println("27");
+                    ////Sustem.out.println("27");
                     setState(301);
                     _localctx.setType(symbolTable.getTypes().getType("Int"));
                     match(INTEGER);
@@ -1859,7 +1867,7 @@ public class pass2Parser extends Parser {
                 case STRING:
                     enterOuterAlt(_localctx, 10);
                 {
-                    //System.out.println("28");
+                    ////Sustem.out.println("28");
                     _localctx.setType(symbolTable.getTypes().getType("String"));
                     setState(303); match(STRING);
                 }
@@ -1867,7 +1875,7 @@ public class pass2Parser extends Parser {
                 case TRUE:
                     enterOuterAlt(_localctx, 11);
                 {
-                    //System.out.println("29");
+                    ////Sustem.out.println("29");
                     _localctx.setType(symbolTable.getTypes().getType("Bool"));
                     setState(305); match(TRUE);
                 }
@@ -1875,7 +1883,7 @@ public class pass2Parser extends Parser {
                 case FALSE:
                     enterOuterAlt(_localctx, 12);
                 {
-                    //System.out.println("30");
+                    ////Sustem.out.println("30");
                     _localctx.setType(symbolTable.getTypes().getType("Bool"));
                     setState(307); match(FALSE);
                 }
