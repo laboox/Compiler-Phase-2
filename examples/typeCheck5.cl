@@ -10,7 +10,7 @@ Class C inherits B {
 
     a(d:String):String{
         case d of
-        	 a : A => a + d;
+        	 a : A => a;
         esac
     };
 

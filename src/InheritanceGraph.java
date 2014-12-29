@@ -238,7 +238,7 @@ public class InheritanceGraph {
     }
 
     public boolean typeExists(String name){
-        return (getType(name)==null);
+        return (getType(name)!=null);
     }
 
     public boolean isFather(Type father, Type child){
@@ -286,6 +286,7 @@ public class InheritanceGraph {
                 }
             }
         }
+        System.out.println();
     }
 
     public void addToHead(Method method) throws Pass2Error {
@@ -298,6 +299,8 @@ public class InheritanceGraph {
 
     public Method getMethodDFS(Type type, String method){
         Type t = getType(type.getName());
+        if(t==null)
+            return null;
         while(!t.equals(types.get(0))){
             if(t.getMethod(method)!=null){
                 return t.getMethod(method);
