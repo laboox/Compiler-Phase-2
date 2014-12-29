@@ -171,11 +171,31 @@ public class ErrorHandler {
     }
 
     public static void invalidArgType(Token token) throws Pass2Error {
-        System.out.println("atgument");
+        System.out.println("argument");
         printTokenLine(token);
         System.out.println("is not valid.");
+        System.out.println();
         anyError = true;
         throw new Pass2Error();
     }
 
+    public static void unopErr(Token token, String type) throws Pass2Error {
+        System.out.println("operation on");
+        printTokenLine(token);
+        System.out.println("performed on "+type+". that not supported.");
+        System.out.println();
+        anyError = true;
+        throw new Pass2Error();
+    }
+
+    public static void biopErr(Token t1,Token t2, String type1, String type2) throws Pass2Error {
+        System.out.println("operation on");
+        printTokenLine(t1);
+        System.out.println("&");
+        printTokenLine(t2);
+        System.out.println("performed on " + type1 + " and " + type2 + ". that not supported.");
+        System.out.println();
+        anyError = true;
+        throw new Pass2Error();
+    }
 }
