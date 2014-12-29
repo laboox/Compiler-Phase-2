@@ -80,7 +80,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final CoolContext cool() throws RecognitionException {
+    public final CoolContext cool() throws RecognitionException, Pass2Error {
         CoolContext _localctx = new CoolContext(_ctx, getState());
         enterRule(_localctx, 0, RULE_cool);
         try {
@@ -121,7 +121,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final ProgramContext program() throws RecognitionException {
+    public final ProgramContext program() throws RecognitionException, Pass2Error {
         ProgramContext _localctx = new ProgramContext(_ctx, getState());
         enterRule(_localctx, 2, RULE_program);
         int _la;
@@ -183,7 +183,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final ClasContext clas() throws RecognitionException {
+    public final ClasContext clas() throws RecognitionException, Pass2Error {
         ClasContext _localctx = new ClasContext(_ctx, getState());
         enterRule(_localctx, 4, RULE_clas);
         int _la;
@@ -260,7 +260,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final FeatureContext feature() throws RecognitionException {
+    public final FeatureContext feature() throws RecognitionException, Pass2Error {
         FeatureContext _localctx = new FeatureContext(_ctx, getState());
         enterRule(_localctx, 6, RULE_feature);
         int _la;
@@ -423,7 +423,7 @@ public class pass2Parser extends Parser {
         private Type type;
     }
 
-    public final ExprContext expr() throws RecognitionException {
+    public final ExprContext expr() throws RecognitionException, Pass2Error {
         ExprContext _localctx = new ExprContext(_ctx, getState());
         enterRule(_localctx, 10, RULE_expr);
         try {
@@ -479,7 +479,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final NotContext not() throws RecognitionException {
+    public final NotContext not() throws RecognitionException, Pass2Error {
         NotContext _localctx = new NotContext(_ctx, getState());
         enterRule(_localctx, 12, RULE_not);
         try {
@@ -548,7 +548,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final CompContext comp() throws RecognitionException {
+    public final CompContext comp() throws RecognitionException, Pass2Error {
         CompContext _localctx = new CompContext(_ctx, getState());
         enterRule(_localctx, 14, RULE_comp);
         try {
@@ -590,7 +590,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final Comp2Context comp2() throws RecognitionException {
+    public final Comp2Context comp2() throws RecognitionException, Pass2Error {
         Comp2Context _localctx = new Comp2Context(_ctx, getState());
         enterRule(_localctx, 16, RULE_comp2);
         try {
@@ -662,7 +662,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final AddsubContext addsub() throws RecognitionException {
+    public final AddsubContext addsub() throws RecognitionException, Pass2Error {
         AddsubContext _localctx = new AddsubContext(_ctx, getState());
         enterRule(_localctx, 18, RULE_addsub);
         try {
@@ -704,7 +704,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final Addsub2Context addsub2() throws RecognitionException {
+    public final Addsub2Context addsub2() throws RecognitionException, Pass2Error {
         Addsub2Context _localctx = new Addsub2Context(_ctx, getState());
         enterRule(_localctx, 20, RULE_addsub2);
         try {
@@ -767,7 +767,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final MuldivContext muldiv() throws RecognitionException {
+    public final MuldivContext muldiv() throws RecognitionException, Pass2Error {
         MuldivContext _localctx = new MuldivContext(_ctx, getState());
         enterRule(_localctx, 22, RULE_muldiv);
         try {
@@ -809,7 +809,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final Muldiv2Context muldiv2() throws RecognitionException {
+    public final Muldiv2Context muldiv2() throws RecognitionException, Pass2Error {
         Muldiv2Context _localctx = new Muldiv2Context(_ctx, getState());
         enterRule(_localctx, 24, RULE_muldiv2);
         try {
@@ -873,7 +873,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final VoiddContext voidd() throws RecognitionException {
+    public final VoiddContext voidd() throws RecognitionException, Pass2Error {
         VoiddContext _localctx = new VoiddContext(_ctx, getState());
         enterRule(_localctx, 26, RULE_voidd);
         try {
@@ -941,7 +941,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final TargetContext target() throws RecognitionException {
+    public final TargetContext target() throws RecognitionException, Pass2Error {
         TargetContext _localctx = new TargetContext(_ctx, getState());
         enterRule(_localctx, 28, RULE_target);
         try {
@@ -1008,7 +1008,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final CallContext call() throws RecognitionException {
+    public final CallContext call() throws RecognitionException, Pass2Error {
         CallContext _localctx = new CallContext(_ctx, getState());
         enterRule(_localctx, 30, RULE_call);
         try {
@@ -1055,7 +1055,7 @@ public class pass2Parser extends Parser {
         }
     }
 
-    public final Call2Context call2() throws RecognitionException {
+    public final Call2Context call2() throws RecognitionException, Pass2Error {
         Call2Context _localctx = new Call2Context(_ctx, getState());
         enterRule(_localctx, 32, RULE_call2);
         int _la;
@@ -1155,7 +1155,7 @@ public class pass2Parser extends Parser {
         private Type type;
     }
 
-    public final FuncContext func() throws RecognitionException {
+    public final FuncContext func() throws RecognitionException, Pass2Error {
         FuncContext _localctx = new FuncContext(_ctx, getState());
         enterRule(_localctx, 34, RULE_func);
         int _la;
@@ -1168,8 +1168,13 @@ public class pass2Parser extends Parser {
                     //System.out.println("8");
                     setState(206);
 
-                    //Token token=getCurrentToken();
-                    //if()
+                    Token token=getCurrentToken();
+                    Method method=symbolTable.getTypes().getMethodDFS(symbolTable.getClassScope(),token.getText());
+                    if(method==null)
+                        ErrorHandler.noSuchMethod(token);
+                    else
+                        _localctx.setType(method.getReturnType());
+                    int ind=0;
 
                     match(OBJECT);
                     setState(207); match(T__10);
@@ -1177,7 +1182,12 @@ public class pass2Parser extends Parser {
                     _la = _input.LA(1);
                     if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__10) | (1L << T__4) | (1L << T__2) | (1L << IF) | (1L << ISVOID) | (1L << LET) | (1L << WHILE) | (1L << CASE) | (1L << NEW) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << INTEGER) | (1L << OBJECT) | (1L << STRING))) != 0)) {
                         {
-                            setState(208); expr();
+                            setState(208);
+
+                            Type argType= expr().getType();
+                            if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                ErrorHandler.invalidArgType(getCurrentToken());
+
                             setState(213);
                             _errHandler.sync(this);
                             _la = _input.LA(1);
@@ -1185,7 +1195,12 @@ public class pass2Parser extends Parser {
                                 {
                                     {
                                         setState(209); match(T__15);
-                                        setState(210); expr();
+                                        setState(210);
+
+                                        argType= expr().getType();
+                                        if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                            ErrorHandler.invalidArgType(getCurrentToken());
+
                                     }
                                 }
                                 setState(215);
@@ -1271,7 +1286,7 @@ public class pass2Parser extends Parser {
         private Type type;
     }
 
-    public final EndContext end() throws RecognitionException {
+    public final EndContext end() throws RecognitionException, Pass2Error {
         EndContext _localctx = new EndContext(_ctx, getState());
         enterRule(_localctx, 36, RULE_end);
         int _la;
@@ -1303,7 +1318,7 @@ public class pass2Parser extends Parser {
                     Type elseType=expr().getType();
                     setState(229); match(FI);
 
-                    _localctx.setType(symbolTable.getTypes().grandMate(elseType,thenType));
+                    _localctx.setType(symbolTable.getTypes().grandMate(elseType, thenType));
                 }
                 break;
                 case WHILE:
@@ -1504,7 +1519,7 @@ public class pass2Parser extends Parser {
                     if(declaredType=="SELF_TYPE")
                         _localctx.setType(symbolTable.getClassScope());
                     else if(! symbolTable.getTypes().typeExists(declaredType))
-                        ErrorHandler.noSuchType(getCurrentToken());
+                        ErrorHandler.noSuchType(getCurrentToken(),true);
                     else
                         _localctx.setType(symbolTable.getTypes().getType(declaredType));
 
