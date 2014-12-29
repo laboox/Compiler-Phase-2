@@ -207,4 +207,12 @@ public class ErrorHandler {
         if(dostop)
             throw new Pass2Error();
     }
+
+    public static void notAncestor(Token token, Type t1, Type t2) throws Pass2Error {
+        System.out.println("type "+t1.getName()+" is not ancestor of "+t2.getName());
+        printTokenLine(token);
+        System.out.println();
+        anyError = true;
+        throw new Pass2Error();
+    }
 }
