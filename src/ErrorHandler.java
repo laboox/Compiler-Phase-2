@@ -52,7 +52,6 @@ public class ErrorHandler {
         anyError =true;
     }
 
-    //TODO throw
     static void typeErr(Token t) throws Pass2Error {
         System.out.println("static type of expression doesn't conform to type of variable "+t.getText());
         printTokenLine(t);
@@ -87,7 +86,6 @@ public class ErrorHandler {
             throw new Pass2Error();
     }
 
-    //TODO throw
     public static void invalidIdRedefined(Token token) throws Pass2Error {
         System.out.println("variable "+token.getText()+" is redefined in this scope");
         printTokenLine(token);
@@ -95,7 +93,6 @@ public class ErrorHandler {
         throw new Pass2Error();
     }
 
-    //TODO throw
     public static void noSuchVar(Token token) throws Pass2Error {
         System.out.println("variable " + token.getText());
         printTokenLine(token);
@@ -169,6 +166,7 @@ public class ErrorHandler {
         System.out.println("method");
         printTokenLine(token);
         System.out.println("not defines.");
+        anyError = true;
         throw new Pass2Error();
     }
 
@@ -176,9 +174,8 @@ public class ErrorHandler {
         System.out.println("atgument");
         printTokenLine(token);
         System.out.println("is not valid.");
+        anyError = true;
         throw new Pass2Error();
     }
-    //TODO if exeption is for pass2 must throw or if is for both pass
-    //TODO any error must be true
 
 }
