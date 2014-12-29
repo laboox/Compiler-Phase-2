@@ -1168,8 +1168,13 @@ public class pass2Parser extends Parser {
                     //System.out.println("8");
                     setState(206);
 
-                    //Token token=getCurrentToken();
-                    //if()
+                    Token token=getCurrentToken();
+                    Method method=symbolTable.getTypes().getMethodDFS(symbolTable.getClassScope(),token.getText());
+                    if(method==null)
+                        ErrorHandler.noSuchMethod(token);
+                    else
+                        _localctx.setType(method.getReturnType());
+                    int ind=0;
 
                     match(OBJECT);
                     setState(207); match(T__10);
@@ -1177,7 +1182,12 @@ public class pass2Parser extends Parser {
                     _la = _input.LA(1);
                     if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__10) | (1L << T__4) | (1L << T__2) | (1L << IF) | (1L << ISVOID) | (1L << LET) | (1L << WHILE) | (1L << CASE) | (1L << NEW) | (1L << NOT) | (1L << TRUE) | (1L << FALSE) | (1L << INTEGER) | (1L << OBJECT) | (1L << STRING))) != 0)) {
                         {
-                            setState(208); expr();
+                            setState(208);
+
+                            Type argType= expr().getType();
+                            if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                ErrorHandler.invalidArgType(getCurrentToken());
+
                             setState(213);
                             _errHandler.sync(this);
                             _la = _input.LA(1);
@@ -1185,7 +1195,12 @@ public class pass2Parser extends Parser {
                                 {
                                     {
                                         setState(209); match(T__15);
-                                        setState(210); expr();
+                                        setState(210);
+
+                                        argType= expr().getType();
+                                        if(! symbolTable.getTypes().isFather(method.getFormal(ind++).getType(), argType))
+                                            ErrorHandler.invalidArgType(getCurrentToken());
+
                                     }
                                 }
                                 setState(215);

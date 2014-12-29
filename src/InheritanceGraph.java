@@ -299,11 +299,11 @@ public class InheritanceGraph {
         head.peek().addAttribute(attribute);
     }
 
-    public Method getMethodDFS(Type type, String meth){
+    public Method getMethodDFS(Type type, String method){
         Type t = getType(type.getName());
         while(!t.equals(types.get(0))){
-            if(t.getMethod(meth)!=null){
-                return t.getMethod(meth);
+            if(t.getMethod(method)!=null){
+                return t.getMethod(method);
             }
             t = t.getFather();
         }
