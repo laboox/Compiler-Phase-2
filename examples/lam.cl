@@ -1,23 +1,4 @@
-(* A program for
 
-   1. Representing lambda terms
-   2. Interpreting lambda terms
-   3. Compiling lambda calculus programs to Cool
-
-   The lambda calculus is described by the following grammar:
-
-   e ::= x	       a variable
-      |  \x.e	       a function with argument x
-      |  e1@e2	       apply function e1 to argument e2
-
-  Jeff Foster (jfoster@cs.berkeley.edu)
-  March 24, 2000
-*)
-
-(*
- * A list of variables.  We use this to do de Bruijn numbering
- *
- *)
 class VarList inherits IO {
   isNil() : Bool { true };
   head()  : Variable { { abort(); new Variable; } };
@@ -37,10 +18,7 @@ class VarListNE inherits VarList {
 	                  rest.print(); self; } };
 };
 
-(*
- * A list of closures we need to build.  We need to number (well, name)
- * the closures uniquely.
- *)
+
 class LambdaList {
   isNil() : Bool { true };
   headE() : VarList { { abort(); new VarList; } };
@@ -102,10 +80,6 @@ class LambdaListRef {
   };
 };
 
-(*
- * Lambda expressions
- *
- *)
 
 -- A pure virtual class representing any expression
 class Expr inherits IO {
@@ -147,9 +121,7 @@ class Expr inherits IO {
   };
 };
 
-(*
- * Variables
- *)
+
 class Variable inherits Expr {
   name : String;
 
@@ -195,9 +167,7 @@ class Variable inherits Expr {
   };
 };
 
-(*
- * Functions
- *)
+
 class Lambda inherits Expr {
   arg : Variable;
   body : Expr;
@@ -268,9 +238,6 @@ class Lambda inherits Expr {
   };
 };
 
-(*
- * Applications
- *)
 class App inherits Expr {
   fun : Expr;
   arg : Expr;
