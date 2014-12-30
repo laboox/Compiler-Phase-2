@@ -307,7 +307,7 @@ public class InheritanceGraph {
             }
             t = t.getFather();
         }
-        return null;
+        return types.get(0).getMethod(method);
     }
 
     public Attribute getAttributeDFS(Type type, String attr){
