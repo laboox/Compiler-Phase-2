@@ -3,6 +3,8 @@ import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.util.List;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
@@ -615,7 +617,12 @@ public class pass2Parser extends Parser {
                 Comp2Context comp2Context=comp2();
                 Type compType=comp2Context.getType();
 
+                //System.out.println("add  " +addType.getName());
+                //System.out.println("comp "+compType.getName());
+
                 if(compType!=null) {
+                    //System.out.println("comp "+compType.getName());
+
                     if(comp2Context.isEq && ! compType.equals(addType))
                         ErrorHandler.unopErr(getCurrentToken(), compType.getName());
                     else if(! comp2Context.isEq() && ! compType.equals(symbolTable.getTypes().getIntType()))
@@ -696,6 +703,10 @@ public class pass2Parser extends Parser {
                     Token t2=getCurrentToken();
                     Type e2Type = comp2().getType();
 
+
+                    //System.out.println("e2 "+e2Type);
+                    //System.out.println("e1 "+e1Type);
+                    //System.out.println("e1 "+e1Type.getName());
 
                     if(e2Type==null)
                         _localctx.setType(e1Type);
@@ -1298,10 +1309,12 @@ public class pass2Parser extends Parser {
                 setState(179);
 
                 Type callerType=func().getType();
+                //System.out.println("caller  in call "+callerType.getName());
 
                 setState(180);
 
                 Type ret=call2(callerType).getType();
+                //System.out.println("ret in call "+ret);
                 if(ret==null)
                     _localctx.setType(callerType);
                 else
@@ -1385,17 +1398,20 @@ public class pass2Parser extends Parser {
                     setState(188);
 
                     Token token=getCurrentToken();
+                    //System.out.println("caller in call2 "+callerType.getName());
+                    //System.out.println("token "+token.getText());
                     Method method=symbolTable.getTypes().getMethodDFS(callerType, token.getText());
 
-                    if(method==null) {
-                        System.out.println("W1");
+                    //System.out.println("meth "+method.getName());
+                    //System.out.println("ret "+method.returnType);
+                    //System.out.println("ret in call2 "+method.getReturnType());
+                    if(method==null)
                         ErrorHandler.noSuchMethod(token);
-
-                    }else {
-                        if(method.returnType.matchName("SELF_TYPE"))
+                    else {
+                        if(method.getReturnType().matchName("SELF_TYPE"))
                             _localctx.setType(symbolTable.getClassScope());
                         else
-                            _localctx.setType(method.returnType);
+                            _localctx.setType(method.getReturnType());
                     }
                     int ind=0;
 
@@ -1928,6 +1944,8 @@ public class pass2Parser extends Parser {
                     setState(299);
 
                     String id=getCurrentToken().getText();
+                    //System.out.println("id "+id);
+
                     if(id.equals("self"))
                         _localctx.setType(symbolTable.getClassScope());
                     else {
