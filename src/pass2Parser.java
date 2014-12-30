@@ -607,7 +607,7 @@ public class pass2Parser extends Parser {
             {
                 setState(114);
 
-               Type addType=addsub().getType();
+                Type addType=addsub().getType();
                 _localctx.setType(addType);
 
                 setState(115);
@@ -615,8 +615,6 @@ public class pass2Parser extends Parser {
                 Comp2Context comp2Context=comp2();
                 Type compType=comp2Context.getType();
 
-                //System.out.println(addType.getName());
-                //System.out.println();(compType.getName());
                 if(compType!=null) {
                     if(comp2Context.isEq && ! compType.equals(addType))
                         ErrorHandler.unopErr(getCurrentToken(), compType.getName());
@@ -1388,9 +1386,12 @@ public class pass2Parser extends Parser {
 
                     Token token=getCurrentToken();
                     Method method=symbolTable.getTypes().getMethodDFS(callerType, token.getText());
-                    if(method==null)
+
+                    if(method==null) {
+                        System.out.println("W1");
                         ErrorHandler.noSuchMethod(token);
-                    else {
+
+                    }else {
                         if(method.returnType.matchName("SELF_TYPE"))
                             _localctx.setType(symbolTable.getClassScope());
                         else
@@ -1445,7 +1446,7 @@ public class pass2Parser extends Parser {
 
                     Type nextType=call2(_localctx.getType()).getType();
                     if(nextType!=null);
-                        _localctx.setType(nextType);
+                    _localctx.setType(nextType);
                 }
                 break;
                 case 2:
@@ -1514,10 +1515,16 @@ public class pass2Parser extends Parser {
 
                     Token token=getCurrentToken();
                     Method method=symbolTable.getTypes().getMethodDFS(symbolTable.getClassScope(),token.getText());
-                    if(method==null)
+                    if(method==null) {
+                        System.out.println("W2");
                         ErrorHandler.noSuchMethod(token);
-                    else
-                        _localctx.setType(method.getReturnType());
+                    }else {
+                        if (method.returnType.matchName("SELF_TYPE"))
+                            _localctx.setType(symbolTable.getClassScope());
+                        else
+                            _localctx.setType(method.getReturnType());
+
+                    }
                     int ind=0;
 
                     match(OBJECT);
