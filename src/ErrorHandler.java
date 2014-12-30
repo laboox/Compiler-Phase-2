@@ -209,7 +209,7 @@ public class ErrorHandler {
     }
 
     public static void notAncestor(Token token, Type t1, Type t2) throws Pass2Error {
-        System.out.println("type "+t1.getName()+" is not ancestor of "+t2.getName());
+        System.out.println("type "+t1.getName()+"  and "+t2.getName()+ " are not Ancestor and grand child");
         printTokenLine(token);
         System.out.println();
         anyError = true;

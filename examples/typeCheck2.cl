@@ -4,15 +4,15 @@ Class B inherits A {
     b : String;
     c : SELF_TYPE;
     m1(r:A, e:String):C{
-        1
+        new C
     };
 };
 Class C inherits B {
 
     k : B;
 
-    a(d:String):String{
-        k <- c.m1(k,e + d)
+    a(d:Int):String{
+        k <- c.m1(k,1 + d)
     };
 };
 Class D inherits A {};

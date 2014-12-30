@@ -1340,7 +1340,7 @@ public class pass2Parser extends Parser {
                 setState(179);
 
                 Type callerType=func().getType();
-                //System.out.println("caller  in call "+callerType.getName());
+                System.out.println("caller  in call "+callerType.getName());
 
                 setState(180);
 
@@ -1434,13 +1434,8 @@ public class pass2Parser extends Parser {
                     setState(188);
 
                     Token token=getCurrentToken();
-                    //System.out.println("caller in call2 "+callerType.getName());
-                    //System.out.println("token "+token.getText());
                     Method method=symbolTable.getTypes().getMethodDFS(callerType, token.getText());
 
-                    //System.out.println("meth "+method.getName());
-                    //System.out.println("ret "+method.returnType);
-                    //System.out.println("ret in call2 "+method.getReturnType());
                     if(method==null)
                         ErrorHandler.noSuchMethod(token);
                     else {
@@ -1988,6 +1983,8 @@ public class pass2Parser extends Parser {
                             Attribute attribute = symbolTable.getTypes().getAttributeDFS(symbolTable.getClassScope(), id);
                             if (attribute == null)
                                 ErrorHandler.noSuchVar(getCurrentToken());
+                            else if(attribute.getType().isSelfType())
+                                _localctx.setType(symbolTable.getClassScope());
                             else
                                 _localctx.setType(attribute.getType());
                         }

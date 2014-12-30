@@ -8,9 +8,9 @@ Class C inherits B {
 
     k : A;
 
-    a(d:String):String{
+    a(d:String):Int{
         case d of
-        	 a : A => a + d;
+        	 a : A => a + 2;
         esac
     };
 };
