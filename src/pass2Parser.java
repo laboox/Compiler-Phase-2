@@ -1803,6 +1803,8 @@ public class pass2Parser extends Parser {
                     idType= symbolTable.getTypes().getType(valType);
                     if(idType==null)
                         ErrorHandler.noSuchType(getCurrentToken(),true);
+
+                    System.out.println((new LocalVariable(id,idType)).toString());
                     symbolTable.addId(id, idType);
 
                     match(TYPE);
@@ -1846,6 +1848,8 @@ public class pass2Parser extends Parser {
                                 idType= symbolTable.getTypes().getType(letargType);
                                 if(idType==null)
                                     ErrorHandler.noSuchType(getCurrentToken(),true);
+
+                                System.out.println(""+new LocalVariable(id,idType));
                                 symbolTable.addId(id,idType);
 
                                 match(TYPE);
@@ -1913,6 +1917,7 @@ public class pass2Parser extends Parser {
                                 Type idType= symbolTable.getTypes().getType(tokenText);
                                 if(idType==null)
                                     ErrorHandler.noSuchType(token,true);
+                                System.out.println(""+new LocalVariable(id,idType));
                                 symbolTable.addId(id,idType);
                                 //TODO what happened if repeted variable defined
 
