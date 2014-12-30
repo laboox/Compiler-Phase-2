@@ -64,7 +64,7 @@ public class SymbolTable {
 
     public Type lookup(String id) {
         if (tbl.empty()) {
-            ErrorHandler.lookUpErr();
+            //ErrorHandler.lookUpErr();
             return null;
         }
         // I break the abstraction here a bit by knowing that stack is
