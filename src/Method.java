@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Created by sina on 12/25/14.
  */
 public class Method extends Feature {
-    Type returnType;
+    private Type returnType;
     ArrayList<Formal> formals;
 
     public ArrayList<Formal> getFormals() {
