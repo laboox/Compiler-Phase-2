@@ -197,7 +197,12 @@ public class pass2Parser extends Parser {
 
                 symbolTable.setClassScope(symbolTable.getTypes().getType(getCurrentToken().getText()));
 
-                setState(50); match(TYPE);
+                setState(50);
+
+                if(getCurrentToken().getText().equals("SELF_TYPE"))
+                    ErrorHandler.invalidSelfUsage(getCurrentToken(), true);
+
+                match(TYPE);
                 setState(53);
                 _la = _input.LA(1);
                 if (_la==INHERITS) {
@@ -276,12 +281,6 @@ public class pass2Parser extends Parser {
                     ////Sustem.out.println("3");
                     {
                         setState(67);
-                        /*//Sustem.out.println("SET METHOD");
-                        //Sustem.out.println("line "+getCurrentToken().getLine());
-                        //Sustem.out.println(symbolTable.getClassScope().getName());
-                        //Sustem.out.println(getCurrentToken().getText());
-                        //Sustem.out.println(symbolTable.getClassScope().getMethod(getCurrentToken().getText())+" in ");
-                        */
                         symbolTable.setMethodScope(symbolTable.getClassScope().getMethod(getCurrentToken().getText()));
                         match(OBJECT);
                         setState(68); match(T__10);
@@ -309,9 +308,30 @@ public class pass2Parser extends Parser {
 
                         setState(79); match(T__18);
                         setState(80); match(T__11);
-                        setState(81); match(TYPE);
+                        setState(81);
+
+                        Token token=getCurrentToken();
+                        String typeName=token.getText();
+                        Type retType;
+                        if(typeName.equals("SELF_TYPE"))
+                            retType=symbolTable.getClassScope();
+                        else
+                            retType=symbolTable.getTypes().getType(typeName);
+
+                        match(TYPE);
                         setState(82); match(T__4);
-                        setState(83); expr();
+                        setState(83);
+
+                        Type exprType=expr().getType();
+
+                        /*System.out.println(getCurrentToken().getLine());
+                        System.out.println("retType "+retType);
+                        System.out.println("exprType "+exprType);
+                        */
+
+                        if(! symbolTable.getTypes().isFather(retType, exprType))
+                            ErrorHandler.notAncestor(token, retType, exprType);
+
                         setState(84);
                         match(T__1);
                         symbolTable.exitScope();
@@ -325,13 +345,22 @@ public class pass2Parser extends Parser {
                     {
                         setState(87); match(OBJECT);
                         setState(88); match(T__11);
-                        setState(89); match(TYPE);
+                        setState(89);
+
+                        Token token=getCurrentToken();
+                        String typeName=token.getText();
+                        Type type=symbolTable.getTypes().getType(typeName);
+
+                        match(TYPE);
                         setState(92);
                         _la = _input.LA(1);
                         if (_la==T__0) {
                             {
                                 setState(90); match(T__0);
-                                setState(91); expr();
+                                setState(91);
+                                Type exprType=expr().getType();
+                                if(! symbolTable.getTypes().isFather(type, exprType))
+                                    ErrorHandler.notAncestor(token, type, exprType);
                             }
                         }
 
@@ -383,6 +412,8 @@ public class pass2Parser extends Parser {
                 Type type = symbolTable.getTypes().getType(getCurrentToken().getText());
                 if(type == null)
                     ErrorHandler.noSuchType(getCurrentToken(),true);
+                else if(type.getName()=="SELF_TYPE")
+                    ErrorHandler.invalidSelfUsage(getCurrentToken(), true);
                 symbolTable.addId(id, type);
                 match(TYPE);
             }
@@ -1384,6 +1415,9 @@ public class pass2Parser extends Parser {
                             setState(184);
 
                             Token token=getCurrentToken();
+                            if(token.getText().equals("SELF_TYPE"))
+                                ErrorHandler.invalidSelfUsage(getCurrentToken(), true);
+
                             Type declaredrType=symbolTable.getTypes().getType(token.getText());
                             if(declaredrType==null)
                                 ErrorHandler.noSuchType(token, true);
@@ -1391,6 +1425,7 @@ public class pass2Parser extends Parser {
                                 ErrorHandler.notAncestor(getCurrentToken(), declaredrType, callerType);
                             else
                                 callerType=declaredrType;
+
                             match(TYPE);
                         }
                     }
@@ -1875,9 +1910,14 @@ public class pass2Parser extends Parser {
                                 setState(278); match(T__11);
                                 setState(279);
 
-                                Type idType= symbolTable.getTypes().getType(getCurrentToken().getText());
+                                token=getCurrentToken();
+                                String tokenText=token.getText();
+                                if(tokenText.equals("SELF_TYPE"))
+                                    ErrorHandler.invalidSelfUsage(getCurrentToken(), true);
+
+                                Type idType= symbolTable.getTypes().getType(tokenText);
                                 if(idType==null)
-                                    ErrorHandler.noSuchType(getCurrentToken(),true);
+                                    ErrorHandler.noSuchType(token,true);
                                 symbolTable.addId(id,idType);
                                 //TODO what happened if repeted variable defined
 
