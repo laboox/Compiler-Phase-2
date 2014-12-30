@@ -55,8 +55,8 @@ public class SymbolTable {
         if (tbl.empty())
             ErrorHandler.addIdErr();
         else {
-            System.out.println(id);
-            System.out.println(type.toString());
+            //System.out.println(id);
+            //System.out.println(type.toString());
             ((Hashtable) tbl.peek()).put(id, type);
         }
 

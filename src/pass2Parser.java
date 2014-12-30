@@ -1340,7 +1340,7 @@ public class pass2Parser extends Parser {
                 setState(179);
 
                 Type callerType=func().getType();
-                System.out.println("caller  in call "+callerType.getName());
+                //System.out.println("caller  in call "+callerType.getName());
 
                 setState(180);
 
@@ -1772,6 +1772,9 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 4);
                 {
                     symbolTable.enterScope();
+                    System.out.println("in: "+symbolTable.getClassScope());
+                    System.out.println("\tin: "+symbolTable.getMethodScope());
+
                     ////Sustem.out.println("12");
                     setState(250); match(LET);
                     setState(251);
@@ -1804,7 +1807,7 @@ public class pass2Parser extends Parser {
                     if(idType==null)
                         ErrorHandler.noSuchType(getCurrentToken(),true);
 
-                    System.out.println((new LocalVariable(id,idType)).toString());
+                    System.out.println("\t\t"+(new LocalVariable(id,idType)).toString());
                     symbolTable.addId(id, idType);
 
                     match(TYPE);
@@ -1849,8 +1852,8 @@ public class pass2Parser extends Parser {
                                 if(idType==null)
                                     ErrorHandler.noSuchType(getCurrentToken(),true);
 
-                                System.out.println(""+new LocalVariable(id,idType));
-                                symbolTable.addId(id,idType);
+                                System.out.println("\t\t"+new LocalVariable(id,idType));
+                                symbolTable.addId(id, idType);
 
                                 match(TYPE);
                                 setState(264);
@@ -1883,6 +1886,8 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 5);
                 {
                     symbolTable.enterScope();
+                    System.out.println("in: "+symbolTable.getClassScope());
+                    System.out.println("\tin: "+symbolTable.getMethodScope());
                     ////Sustem.out.println("13");
                     setState(274); match(CASE);
                     setState(275);
@@ -1917,8 +1922,9 @@ public class pass2Parser extends Parser {
                                 Type idType= symbolTable.getTypes().getType(tokenText);
                                 if(idType==null)
                                     ErrorHandler.noSuchType(token,true);
-                                System.out.println(""+new LocalVariable(id,idType));
-                                symbolTable.addId(id,idType);
+
+                                System.out.println("\t\t"+new LocalVariable(id,idType));
+                                symbolTable.addId(id, idType);
                                 //TODO what happened if repeted variable defined
 
                                 match(TYPE);
