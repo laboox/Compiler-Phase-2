@@ -1426,7 +1426,7 @@ public class pass2Parser extends Parser {
                                         setState(192);
 
                                         argType= expr().getType();
-                                        Type formaType = method.getFormal(ind++).getType();
+                                        formalType = method.getFormal(ind++).getType();
                                         if(formalType.matchName("SELF_TYPE"))
                                             formalType = symbolTable.getClassScope();
                                         if(! symbolTable.getTypes().isFather(formalType, argType))
@@ -1445,8 +1445,8 @@ public class pass2Parser extends Parser {
                     setState(201);
 
                     Type nextType=call2(_localctx.getType()).getType();
-                    if(nextType!=null);
-                    _localctx.setType(nextType);
+                    if(nextType!=null)
+                        _localctx.setType(nextType);
                 }
                 break;
                 case 2:
@@ -1515,11 +1515,11 @@ public class pass2Parser extends Parser {
 
                     Token token=getCurrentToken();
                     Method method=symbolTable.getTypes().getMethodDFS(symbolTable.getClassScope(),token.getText());
-                    if(method==null) {
-                        System.out.println("W2");
+
+                    if(method==null)
                         ErrorHandler.noSuchMethod(token);
-                    }else {
-                        if (method.returnType.matchName("SELF_TYPE"))
+                    else {
+                        if (method.getReturnType().matchName("SELF_TYPE"))
                             _localctx.setType(symbolTable.getClassScope());
                         else
                             _localctx.setType(method.getReturnType());
@@ -1574,7 +1574,10 @@ public class pass2Parser extends Parser {
                     enterOuterAlt(_localctx, 2);
                 {
                     setState(219);
-                    _localctx.setType(end().getType());
+                    Type endType=end().getType();
+                    //System.out.println(getCurrentToken().getLine());
+                    //System.out.println("end Type "+endType.getName());
+                    _localctx.setType(endType);
                 }
                 break;
             }
